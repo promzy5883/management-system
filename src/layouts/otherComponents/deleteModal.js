@@ -22,9 +22,10 @@ export default function DeleteModal({ cancel, submit }) {
         alignItems: "center",
         transition: "1s",
         opacity: opacity,
+        zIndex: 10,
       }}
     >
-      <Card sx={{ p: 2, width: "85%", maxWidth: "300px", zIndex: 10 }}>
+      <Card sx={{ p: 2, width: "85%", maxWidth: "300px", zIndex: 20 }}>
         <MDTypography variant="button" fontWeight="bold">
           Are you sure <br /> you want to submit this form?
         </MDTypography>
