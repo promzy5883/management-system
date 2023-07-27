@@ -52,7 +52,6 @@ export default function SetUpCompanyInfo() {
               py: 2,
               px: 2,
               maxWidth: "590px",
-              width: "100%",
             }}
           >
             <form>

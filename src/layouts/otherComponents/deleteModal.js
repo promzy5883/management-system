@@ -13,7 +13,7 @@ export default function DeleteModal({ cancel, submit }) {
       style={{
         width: "100vw",
         height: "100vh",
-        position: "absolute",
+        position: "fixed",
         top: "0px",
         left: "0px",
         backgroundColor: "rgba(0,0,0,0.1)",
