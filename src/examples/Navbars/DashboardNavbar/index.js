@@ -52,7 +52,8 @@ import {
   setMiniSidenav,
   setOpenConfigurator,
 } from "context";
-import { Home, MenuOpen, Notifications, Person, Settings } from "@mui/icons-material";
+import { Home, MenuOpen, MenuOutlined, Notifications, Person, Settings } from "@mui/icons-material";
+import MDTypography from "components/MDTypography";
 
 function DashboardNavbar({ absolute, light, isMini, zIndex, opacity }) {
   const [navbarType, setNavbarType] = useState();
@@ -147,25 +148,30 @@ function DashboardNavbar({ absolute, light, isMini, zIndex, opacity }) {
             </MDBox>
             <MDBox color={light ? "white" : "inherit"}>
               <Link to="/profile">
-                <IconButton sx={navbarIconButton} size="small" disableRipple>
+                <IconButton sx={navbarIconButton} size="medium" disableRipple>
                   <Person sx={iconsStyle} />
                 </IconButton>
               </Link>
+
               <IconButton
-                size="small"
+                size="medium"
                 disableRipple
                 color="inherit"
                 sx={navbarMobileMenu}
                 onClick={handleMiniSidenav}
               >
+                <div style={{ transform: "translateY(8px)" }}>
+                  <MDTypography variant="overline">Menu</MDTypography>
+                </div>
                 {miniSidenav ? (
                   <MenuOpen sx={iconsStyle} fontSize="medium" />
                 ) : (
-                  <Menu sx={iconsStyle} fontSize="medium" />
+                  <MenuOutlined sx={iconsStyle} fontSize="medium" />
                 )}
               </IconButton>
+
               <IconButton
-                size="small"
+                size="medium"
                 disableRipple
                 color="inherit"
                 sx={navbarIconButton}
@@ -174,7 +180,7 @@ function DashboardNavbar({ absolute, light, isMini, zIndex, opacity }) {
                 <Settings sx={iconsStyle} />
               </IconButton>
               <IconButton
-                size="small"
+                size="medium"
                 disableRipple
                 color="inherit"
                 sx={navbarIconButton}

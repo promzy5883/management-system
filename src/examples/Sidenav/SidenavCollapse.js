@@ -35,14 +35,30 @@ import {
 
 // Material Dashboard 2 React context
 import { useMaterialUIController } from "context";
+import MDTypography from "components/MDTypography";
+import { useState } from "react";
 
 function SidenavCollapse({ caret, icon, name, active, ...rest }) {
   const [controller] = useMaterialUIController();
+  const [isHovered, setIsHovered] = useState(false);
   const { miniSidenav, transparentSidenav, whiteSidenav, darkMode, sidenavColor } = controller;
+  const [letters, setLetters] = useState(
+    name.length < 16 ? [name] : [name.slice(0, 15), name.slice(15)]
+  );
+
+  let textColor = "white";
+
+  if (transparentSidenav || (whiteSidenav && !darkMode)) {
+    textColor = "dark";
+  } else if (whiteSidenav && darkMode) {
+    textColor = "inherit";
+  }
 
   return (
     <ListItem component="li">
       <MDBox
+        onMouseOver={() => setIsHovered(true)}
+        onMouseOut={() => setIsHovered(false)}
         {...rest}
         sx={(theme) =>
           collapseItem(theme, {
@@ -54,29 +70,40 @@ function SidenavCollapse({ caret, icon, name, active, ...rest }) {
           })
         }
       >
-        <ListItemIcon
-          sx={(theme) =>
-            collapseIconBox(theme, { transparentSidenav, whiteSidenav, darkMode, active })
-          }
+        <MDTypography
+          color={active || isHovered ? "white" : "info"}
+          width="27px"
+          display="flex"
+          alignItems="center"
+          height="36px"
         >
           {typeof icon === "string" ? (
             <Icon sx={(theme) => collapseIcon(theme, { active })}>{icon}</Icon>
           ) : (
             icon
           )}
-        </ListItemIcon>
+        </MDTypography>
 
-        <ListItemText
-          primary={name}
-          sx={(theme) =>
-            collapseText(theme, {
-              miniSidenav,
-              transparentSidenav,
-              whiteSidenav,
-              active,
-            })
-          }
-        />
+        <MDTypography
+          color={textColor}
+          variant="button"
+          width="145px"
+          maxWidth="145px"
+          paddingLeft="8px"
+        >
+          <p
+            style={{
+              width: "125px",
+              display: "flex",
+              flexWrap: "wrap",
+            }}
+          >
+            {letters.map((letter) => (
+              <span key={letter}>{letter}</span>
+            ))}
+          </p>
+        </MDTypography>
+
         {caret && caret}
       </MDBox>
     </ListItem>

@@ -33,7 +33,7 @@ import {
   setWhiteSidenav,
 } from "context";
 import { childrenRoutes } from "routes";
-import { ArrowRight } from "@mui/icons-material";
+import { ArrowRight, Close } from "@mui/icons-material";
 
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const [controller, dispatch] = useMaterialUIController();
@@ -124,7 +124,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
             sx={{ textDecoration: "none" }}
           >
             <SidenavCollapse
-              name={name.length > 12 ? name.slice(0, 12).concat("...") : name}
+              name={name}
               icon={icon}
               active={key === collapseName}
               noCollapse={noCollapse}
@@ -132,12 +132,21 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           </Link>
         ) : (
           <NavLink key={key} to={route}>
-            <SidenavCollapse
-              name={name.length > 12 ? name.slice(0, 12).concat("...") : name}
-              icon={icon}
-              active={key === collapseName}
-            />
+            <SidenavCollapse name={name} icon={icon} active={key === collapseName} />
           </NavLink>
+        );
+      } else if (type === "header") {
+        returnValue = (
+          <div
+            style={{
+              width: "100%",
+              padding: "10px 30px 0px 60px",
+            }}
+          >
+            <MDTypography variant="overline" fontWeight="medium" opacity="0.7" color={textColor}>
+              {name.toUpperCase()}
+            </MDTypography>
+          </div>
         );
       } else if (!isLink) {
         let children = childrenRoutes.filter((route) => route.parent === key);
@@ -146,7 +155,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           <div style={{ position: "relative", height: "auto" }}>
             <div onClick={() => toggleMenuLink(key)}>
               <SidenavCollapse
-                name={name.length > 12 ? name.slice(0, 12).concat("...") : name}
+                name={name}
                 icon={icon}
                 active={checkIsActive(children)}
                 caret={<ArrowRight fontSize="small" />}
@@ -160,9 +169,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
                   return (
                     <NavLink key={child.key} to={child.route}>
                       <SidenavCollapse
-                        name={
-                          child.name.length > 8 ? child.name.slice(0, 12).concat("...") : child.name
-                        }
+                        name={child.name}
                         active={location.pathname === child.route}
                       />
                     </NavLink>
@@ -222,7 +229,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           sx={{ cursor: "pointer" }}
         >
           <MDTypography variant="h6" color="secondary">
-            <Icon sx={{ fontWeight: "bold" }}>close</Icon>
+            <Close color={textColor} sx={{ fontWeight: "bold" }} />
           </MDTypography>
         </MDBox>
         <MDBox component={NavLink} to="/" display="flex" alignItems="center">
