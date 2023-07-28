@@ -44,60 +44,60 @@ export default function SetUpCompanyInfo() {
               overflow: "hidden",
             }}
           />
-          <Card
-            sx={{
-              position: "relative",
-              mt: -14,
-              mx: 3,
-              py: 2,
-              px: 2,
-              maxWidth: "590px",
-            }}
-          >
-            <form>
-              <div
-                style={{
-                  width: "100%",
-                  maxWidth: "550px",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  rowGap: "15px",
-                  columnGap: "20px",
-                }}
-              >
-                <MDInput
-                  label="Company Name"
-                  value={companyName}
-                  onChange={(e) => setCompanyName(e.target.value)}
-                  fullWidth
-                />
-                <div style={{ width: "265px" }}>
+          <MDBox width="100%" display="flex" justifyContent="center">
+            <Card
+              sx={{
+                position: "relative",
+                mt: -18,
+                py: 2,
+                px: 2,
+                maxWidth: "590px",
+              }}
+            >
+              <form>
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "550px",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    rowGap: "15px",
+                    columnGap: "20px",
+                  }}
+                >
+                  <MDInput
+                    label="Company Name"
+                    value={companyName}
+                    onChange={(e) => setCompanyName(e.target.value)}
+                    fullWidth
+                  />
+
                   <MDInput
                     label="Address"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     fullWidth
                   />
-                </div>
-                <div style={{ width: "265px" }}>
-                  <MDInput
-                    type="number"
-                    label="Phone Number"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    fullWidth
-                  />
-                </div>
-                <div style={{ width: "265px" }}>
-                  <MDInput
-                    label="Alternative Phone"
-                    type="number"
-                    value={alternativePhone}
-                    onChange={(e) => setAlternativePhone(e.target.value)}
-                    fullWidth
-                  />
-                </div>
-                <div style={{ width: "265px" }}>
+
+                  <div style={{ width: "265px" }}>
+                    <MDInput
+                      type="number"
+                      label="Phone Number"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      fullWidth
+                    />
+                  </div>
+                  <div style={{ width: "265px" }}>
+                    <MDInput
+                      label="Alternative Phone"
+                      type="number"
+                      value={alternativePhone}
+                      onChange={(e) => setAlternativePhone(e.target.value)}
+                      fullWidth
+                    />
+                  </div>
+
                   <MDInput
                     label="Email"
                     type="email"
@@ -105,33 +105,36 @@ export default function SetUpCompanyInfo() {
                     onChange={(e) => setEmail(e.target.value)}
                     fullWidth
                   />
+
+                  <div
+                    style={{
+                      width: "265px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <MDTypography variant="button" fontWeight="medium">
+                      Upload Logo
+                    </MDTypography>
+                  </div>
+                  <div style={{ width: "265px" }}>
+                    <MDInput
+                      type="file"
+                      value={logo}
+                      onChange={(e) => setLogo(e.target.files[0])}
+                      fullWidth
+                    />
+                  </div>
+                  <div style={{ width: "100%", maxWidth: "265px" }}>
+                    <MDButton color="success" onClick={() => setModalActive(true)} fullWidth>
+                      Submit
+                    </MDButton>
+                  </div>
                 </div>
-                <div
-                  style={{
-                    width: "265px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <MDTypography variant="button" fontWeight="medium">
-                    Upload Logo
-                  </MDTypography>
-                </div>
-                <div style={{ width: "265px" }}>
-                  <MDInput
-                    type="file"
-                    value={logo}
-                    onChange={(e) => setLogo(e.target.files[0])}
-                    fullWidth
-                  />
-                </div>
-                <MDButton color="dark" fullWidth onClick={() => setModalActive(true)}>
-                  Submit
-                </MDButton>
-              </div>
-            </form>
-          </Card>
+              </form>
+            </Card>
+          </MDBox>
         </MDBox>
       </DashboardLayout>
     </>

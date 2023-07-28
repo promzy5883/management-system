@@ -17,9 +17,12 @@ import {
   PersonPin,
   Receipt,
   Settings,
+  TableChartRounded,
 } from "@mui/icons-material";
 import SetUpCompanyInfo from "layouts/set-up-company-info";
 import SubscriptionDetails from "layouts/subscription-details";
+import ItemSettings from "layouts/item-settings";
+import ItemLists from "layouts/itemLists";
 
 const routes = [
   {
@@ -30,6 +33,13 @@ const routes = [
     icon: <DashboardIcon fontSize="medium" />,
     route: "/my-workspace",
     component: <Dashboard color="inherit" />,
+  },
+  {
+    isLink: false,
+    type: "collapse",
+    name: "Profile",
+    key: "profile",
+    icon: <Person color="inherit" fontSize="medium" />,
   },
   {
     isLink: "No",
@@ -113,7 +123,7 @@ const routes = [
     type: "collapse",
     name: "Team Boards",
     key: "team-boards",
-    icon: <People fontSize="medium" />,
+    icon: <TableChartRounded fontSize="medium" />,
     route: "/team-boards",
     component: <Dashboard color="inherit" />,
   },
@@ -155,13 +165,6 @@ const routes = [
     route: "/admin-settings",
     component: <Dashboard />,
   },
-  {
-    isLink: false,
-    type: "collapse",
-    name: "Profile",
-    key: "profile",
-    icon: <Person color="inherit" fontSize="medium" />,
-  },
 ];
 
 export const childrenRoutes = [
@@ -171,7 +174,7 @@ export const childrenRoutes = [
     name: "List",
     key: "list",
     route: "/manage-items-list",
-    component: <Dashboard />,
+    component: <ItemLists />,
   },
   {
     isLink: true,
@@ -179,7 +182,7 @@ export const childrenRoutes = [
     name: "Item Settings",
     key: "item-settings",
     route: "/manage-items-settings",
-    component: <Dashboard />,
+    component: <ItemSettings />,
   },
   {
     isLink: true,

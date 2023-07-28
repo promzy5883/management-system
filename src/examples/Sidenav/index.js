@@ -140,10 +140,10 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           <div
             style={{
               width: "100%",
-              padding: "10px 30px 0px 60px",
+              padding: "15px 30px 4px 25px",
             }}
           >
-            <MDTypography variant="overline" fontWeight="medium" opacity="0.7" color={textColor}>
+            <MDTypography variant="button" fontWeight="medium" opacity="0.7" color={textColor}>
               {name.toUpperCase()}
             </MDTypography>
           </div>
