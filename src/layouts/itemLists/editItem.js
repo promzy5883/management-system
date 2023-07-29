@@ -8,7 +8,7 @@ import MDInput from "components/MDInput";
 import ItemUnitModal from "./itemUnitModal";
 import MDBox from "components/MDBox";
 
-export default function AddItem({ submitted, cancel }) {
+export default function EditItem({ data, no, submitted, cancel }) {
   const [position, setPosition] = useState(0);
   const [itemName, setItemName] = useState("");
   const [brand, setBrand] = useState("");
@@ -18,7 +18,17 @@ export default function AddItem({ submitted, cancel }) {
   const [units, setUnits] = useState([]);
 
   const brandNameData = ["SELECT", "NESTLE", "SO YUMMY"];
-  const categoryData = ["SELECT", "SEASONING", "MILK", "CEREALS"];
+  const categoryData = ["SELECT", "SEASONING", "MILK", "CEREALS", "OIL"];
+
+  let mainData = data[no - 1];
+
+  useEffect(() => {
+    setItemName(mainData.Name);
+    setCategory(mainData.category);
+    setBrand(mainData.brandName);
+    setUnits(mainData.itemUnit);
+    setRackLocation(mainData.rackLocation);
+  }, []);
 
   const handleSubmit = () => {
     const data = {
@@ -69,7 +79,7 @@ export default function AddItem({ submitted, cancel }) {
             justifyContent="space-between"
             alignItems="center"
           >
-            Add Item
+            Edit Item
             <button
               onClick={() => cancel()}
               style={{ border: "none", backgroundColor: "transparent", cursor: "pointer" }}
@@ -171,6 +181,7 @@ export default function AddItem({ submitted, cancel }) {
                     {unit.unit.toUpperCase()}
                   </MDTypography>
                   <MDInput
+                    value={unit.unitPrice}
                     label={`${unit.unit} UNIT PRICE`}
                     onChange={(e) =>
                       setUnits(
@@ -186,6 +197,7 @@ export default function AddItem({ submitted, cancel }) {
                     size="small"
                   />
                   <MDInput
+                    value={unit.unitBarCode}
                     label={`${unit.unit} BARCODE`}
                     size="small"
                     onChange={(e) =>
@@ -201,6 +213,7 @@ export default function AddItem({ submitted, cancel }) {
                     }
                   />
                   <MDInput
+                    value={unit.minimumStock}
                     label="MINIMUM STOCK QTY"
                     size="small"
                     onChange={(e) =>
