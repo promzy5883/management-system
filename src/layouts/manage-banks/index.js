@@ -17,7 +17,13 @@ export default function ManageBanks() {
   const [modalActive, setModalActive] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [addBankModal, setAddBankModal] = useState(false);
-  const [banks, setBanks] = useState([]);
+  const [banks, setBanks] = useState([
+    {
+      bankAccountName: "CHIMSON BROTHERS",
+      bankName: "First Bank",
+      accountNumber: 3049122766,
+    },
+  ]);
   const [banksData, setBanksData] = useState([]);
   const [dataToEdit, setDataToEdit] = useState({});
   const [accountNo, setAccountNo] = useState(0);
@@ -152,17 +158,7 @@ export default function ManageBanks() {
             rowGap="10px"
             columnGap="10px"
             justifyContent="center"
-          >
-            <MDButton
-              color="success"
-              display="flex"
-              alignItems="center"
-              onClick={() => setAddBankModal(true)}
-            >
-              <Add />
-              &nbsp; Add Bank
-            </MDButton>
-          </MDBox>
+          ></MDBox>
           <MDBox width="100%" display="flex" justifyContent="center" marginTop="-50px">
             <Card
               sx={{
@@ -173,6 +169,17 @@ export default function ManageBanks() {
                 minWidth: "95%",
               }}
             >
+              <MDBox width="170px">
+                <MDButton
+                  color="success"
+                  display="flex"
+                  alignItems="center"
+                  onClick={() => setAddBankModal(true)}
+                >
+                  <Add />
+                  &nbsp; Add Bank
+                </MDButton>
+              </MDBox>
               <DataTable
                 canSearch={true}
                 table={{

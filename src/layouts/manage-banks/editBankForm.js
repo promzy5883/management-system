@@ -27,7 +27,14 @@ export default function EditBank({ data, submitted, cancel }) {
     { label: "Credit", type: "text", value: data.Credit },
   ]);
 
-  const categories = [];
+  const categories = [
+    {
+      categoryName: "Current Assets",
+    },
+    { categoryName: "Current Liabilities" },
+    { categoryName: "Equity" },
+    { categoryName: "Non-Current Liabilities" },
+  ];
   const accounts = [];
 
   const updateOpeningBalanceForm = (label, newValue) => {
@@ -63,12 +70,12 @@ export default function EditBank({ data, submitted, cancel }) {
     <div className="addSettingModal" style={{ alignItems: "center" }}>
       <Card
         sx={{
-          maxWidth: "438px",
+          maxWidth: "680px",
           width: "90%",
           p: 2,
-          height: "500px",
+          height: "480px",
           transition: "0.4s",
-          opacity: position,
+          opacity: `${position}`,
           zIndex: 20,
           overflowY: "scroll",
         }}
@@ -93,68 +100,97 @@ export default function EditBank({ data, submitted, cancel }) {
           </button>
         </MDTypography>
 
-        <MDBox display="flex" flexWrap="wrap" rowGap="10px" columnGap="15px">
-          <MDInput
-            label="Bank Account Name"
-            value={bankAccountName}
-            onChange={(e) => setBankAccountName(e.target.value)}
-          />
-          <MDInput
-            label="Bank Name"
-            value={bankName}
-            onChange={(e) => setBankName(e.target.value)}
-          />
-          <MDBox width="100%">
-            <MDTypography variant="caption" fontWeight="medium">
-              CATEGORY
-            </MDTypography>
-            <select
-              value={categoryValue}
-              onChange={(e) => setCategoryValue(e.target.value)}
-              style={{
-                width: "100%",
-                outline: "none",
-                border: "1px solid rgb(230, 226, 226)",
-                borderRadius: "5px",
-                fontSize: "11px",
-                color: "rgba(0,0,0,0.7)",
-                minHeight: "40px",
-                paddingLeft: "6px",
-              }}
-            >
-              <option style={{ color: "gray", fontSize: "14px" }}>
-                <MDTypography variant="caption">SELECT CATEGORY</MDTypography>
-              </option>
-              {categories.map((data) => {
-                return (
-                  <option style={{ color: "gray", fontSize: "14px" }}>
-                    <MDTypography variant="caption">{data.categoryName.toUpperCase()}</MDTypography>
-                  </option>
-                );
-              })}
-            </select>
-          </MDBox>
+        <MDBox display="flex" flexDirection="column" width="100%" gap="15px">
+          <div
+            style={{
+              width: "100%",
+              display: "grid",
+              gridTemplateColumns: "48% 48%",
+              justifyContent: "space-between",
+            }}
+          >
+            <MDInput
+              label="Bank Account Name"
+              value={bankAccountName}
+              onChange={(e) => setBankAccountName(e.target.value)}
+            />
+            <MDInput
+              label="Bank Name"
+              value={bankName}
+              onChange={(e) => setBankName(e.target.value)}
+            />
+          </div>
+          <div
+            style={{
+              width: "100%",
+              display: "grid",
+              gridTemplateColumns: "48% 48%",
+              justifyContent: "space-between",
+              alignItems: "end",
+            }}
+          >
+            <MDBox width="100%">
+              <MDTypography variant="caption" fontWeight="medium">
+                CATEGORY
+              </MDTypography>
+              <select
+                value={categoryValue}
+                onChange={(e) => setCategoryValue(e.target.value)}
+                style={{
+                  width: "100%",
+                  outline: "none",
+                  border: "1px solid rgb(230, 226, 226)",
+                  borderRadius: "5px",
+                  fontSize: "11px",
+                  color: "rgba(0,0,0,0.7)",
+                  minHeight: "40px",
+                  paddingLeft: "6px",
+                }}
+              >
+                <option style={{ color: "gray", fontSize: "14px" }}>
+                  <MDTypography variant="caption">SELECT CATEGORY</MDTypography>
+                </option>
+                {categories.map((data) => {
+                  return (
+                    <option style={{ color: "gray", fontSize: "14px" }}>
+                      <MDTypography variant="caption">
+                        {data.categoryName.toUpperCase()}
+                      </MDTypography>
+                    </option>
+                  );
+                })}
+              </select>
+            </MDBox>
+            <MDInput
+              label="Account Number"
+              type="number"
+              value={accountNumber}
+              onChange={(e) => setAccountNumber(e.target.value)}
+            />
+          </div>
 
-          <MDInput
-            label="Account Number"
-            type="number"
-            value={accountNumber}
-            onChange={(e) => setAccountNumber(e.target.value)}
-          />
-          <MDInput
-            label="Branch Name"
-            value={branchName}
-            onChange={(e) => setBranchName(e.target.value)}
-          />
-          <MDInput
-            label="Branch Code"
-            value={branchCode}
-            onChange={(e) => setBranchCode(e.target.value)}
-            type="number"
-            fullWidth
-          />
+          <div
+            style={{
+              width: "100%",
+              display: "grid",
+              gridTemplateColumns: "48% 48%",
+              justifyContent: "space-between",
+            }}
+          >
+            <MDInput
+              label="Branch Name"
+              value={branchName}
+              onChange={(e) => setBranchName(e.target.value)}
+            />
+            <MDInput
+              label="Branch Code"
+              value={branchCode}
+              onChange={(e) => setBranchCode(e.target.value)}
+              type="number"
+              fullWidth
+            />
+          </div>
         </MDBox>
-
         <div
           style={{
             width: "100%",
@@ -170,12 +206,12 @@ export default function EditBank({ data, submitted, cancel }) {
               overflowX: "scroll",
             }}
           >
-            <div style={{ display: "flex", gap: "10px", alignItems: "end", width: "1150px" }}>
+            <div style={{ display: "flex", gap: "10px", alignItems: "end", width: "670px" }}>
               {openingBalanceForm.map((data) => {
                 return (
                   <>
                     {data.type !== "date" && data.type !== "select" && (
-                      <MDBox width="135px">
+                      <MDBox width="80px">
                         <MDInput
                           type={data.type}
                           label={data.label}
@@ -186,7 +222,7 @@ export default function EditBank({ data, submitted, cancel }) {
                       </MDBox>
                     )}
                     {data.type === "select" && (
-                      <MDBox width="140px">
+                      <MDBox width="80px">
                         <MDTypography variant="caption" fontWeight="medium">
                           {data.label}
                         </MDTypography>
@@ -220,7 +256,7 @@ export default function EditBank({ data, submitted, cancel }) {
                       </MDBox>
                     )}
                     {data.type === "date" && (
-                      <MDBox width="135px">
+                      <MDBox width="80px">
                         <MDTypography variant="caption" fontWeight="medium">
                           {data.label}
                         </MDTypography>

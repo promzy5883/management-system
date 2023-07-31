@@ -54,7 +54,7 @@ export default function CreateAccount({ submitted, cancel, category }) {
     <div className="addSettingModal">
       <Card
         sx={{
-          maxWidth: "450px",
+          maxWidth: "680px",
           width: "90%",
           p: 2,
           height: "330px",
@@ -90,68 +90,80 @@ export default function CreateAccount({ submitted, cancel, category }) {
             onChange={(e) => setName(e.target.value)}
             fullWidth
           />
-          <MDBox>
-            <MDTypography variant="caption" fontWeight="medium" margin="0px 8px 0px 0px">
-              TYPE
-            </MDTypography>
-            <select
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-              style={{
-                width: "100%",
-                outline: "none",
-                border: "1px solid rgb(230, 226, 226)",
-                borderRadius: "5px",
-                fontSize: "11px",
-                color: "rgba(0,0,0,0.7)",
-                minHeight: "40px",
-                paddingLeft: "6px",
-              }}
-            >
-              <option style={{ color: "gray", fontSize: "14px" }}>
-                <MDTypography variant="caption">SELECT TYPE</MDTypography>
-              </option>
-              <option style={{ color: "gray", fontSize: "14px" }}>
-                <MDTypography variant="caption">GL</MDTypography>
-              </option>
-              <option style={{ color: "gray", fontSize: "14px" }}>
-                <MDTypography variant="caption">AR</MDTypography>
-              </option>
-              <option style={{ color: "gray", fontSize: "14px" }}>
-                <MDTypography variant="caption">AP</MDTypography>
-              </option>
-            </select>
-          </MDBox>
-          <MDBox>
-            <MDTypography variant="caption" fontWeight="medium" margin="0px 8px 0px 0px">
-              CATEGORY
-            </MDTypography>
-            <select
-              value={categoryValue}
-              onChange={(e) => setCategoryValue(e.target.value)}
-              style={{
-                width: "100%",
-                outline: "none",
-                border: "1px solid rgb(230, 226, 226)",
-                borderRadius: "5px",
-                fontSize: "11px",
-                color: "rgba(0,0,0,0.7)",
-                minHeight: "40px",
-                paddingLeft: "6px",
-              }}
-            >
-              <option style={{ color: "gray", fontSize: "14px" }}>
-                <MDTypography variant="caption">SELECT CATEGORY</MDTypography>
-              </option>
-              {category.map((data) => {
-                return (
-                  <option style={{ color: "gray", fontSize: "14px" }}>
-                    <MDTypography variant="caption">{data.categoryName.toUpperCase()}</MDTypography>
-                  </option>
-                );
-              })}
-            </select>
-          </MDBox>
+          <div
+            style={{
+              width: "100%",
+              display: "grid",
+              gridTemplateColumns: "48% 48%",
+              justifyContent: "space-between",
+              alignItems: "end",
+            }}
+          >
+            <MDBox>
+              <MDTypography variant="caption" fontWeight="medium" margin="0px 8px 0px 0px">
+                TYPE
+              </MDTypography>
+              <select
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+                style={{
+                  width: "100%",
+                  outline: "none",
+                  border: "1px solid rgb(230, 226, 226)",
+                  borderRadius: "5px",
+                  fontSize: "11px",
+                  color: "rgba(0,0,0,0.7)",
+                  minHeight: "40px",
+                  paddingLeft: "6px",
+                }}
+              >
+                <option style={{ color: "gray", fontSize: "14px" }}>
+                  <MDTypography variant="caption">SELECT TYPE</MDTypography>
+                </option>
+                <option style={{ color: "gray", fontSize: "14px" }}>
+                  <MDTypography variant="caption">GL</MDTypography>
+                </option>
+                <option style={{ color: "gray", fontSize: "14px" }}>
+                  <MDTypography variant="caption">AR</MDTypography>
+                </option>
+                <option style={{ color: "gray", fontSize: "14px" }}>
+                  <MDTypography variant="caption">AP</MDTypography>
+                </option>
+              </select>
+            </MDBox>
+            <MDBox>
+              <MDTypography variant="caption" fontWeight="medium" margin="0px 8px 0px 0px">
+                CATEGORY
+              </MDTypography>
+              <select
+                value={categoryValue}
+                onChange={(e) => setCategoryValue(e.target.value)}
+                style={{
+                  width: "100%",
+                  outline: "none",
+                  border: "1px solid rgb(230, 226, 226)",
+                  borderRadius: "5px",
+                  fontSize: "11px",
+                  color: "rgba(0,0,0,0.7)",
+                  minHeight: "40px",
+                  paddingLeft: "6px",
+                }}
+              >
+                <option style={{ color: "gray", fontSize: "14px" }}>
+                  <MDTypography variant="caption">SELECT CATEGORY</MDTypography>
+                </option>
+                {category.map((data) => {
+                  return (
+                    <option style={{ color: "gray", fontSize: "14px" }}>
+                      <MDTypography variant="caption">
+                        {data.categoryName.toUpperCase()}
+                      </MDTypography>
+                    </option>
+                  );
+                })}
+              </select>
+            </MDBox>
+          </div>
           <div
             style={{
               width: "100%",
@@ -167,12 +179,12 @@ export default function CreateAccount({ submitted, cancel, category }) {
                 overflowX: "scroll",
               }}
             >
-              <div style={{ display: "flex", gap: "10px", alignItems: "end", width: "1150px" }}>
+              <div style={{ display: "flex", gap: "10px", alignItems: "end", width: "670px" }}>
                 {openingBalanceForm.map((data) => {
                   return (
                     <>
                       {data.type !== "date" && data.type !== "select" && (
-                        <MDBox width="135px">
+                        <MDBox width="80px">
                           <MDInput
                             type={data.type}
                             label={data.label}
@@ -183,7 +195,7 @@ export default function CreateAccount({ submitted, cancel, category }) {
                         </MDBox>
                       )}
                       {data.type === "select" && (
-                        <MDBox width="140px">
+                        <MDBox width="80px">
                           <MDTypography variant="caption" fontWeight="medium">
                             {data.label}
                           </MDTypography>
@@ -217,7 +229,7 @@ export default function CreateAccount({ submitted, cancel, category }) {
                         </MDBox>
                       )}
                       {data.type === "date" && (
-                        <MDBox width="135px">
+                        <MDBox width="80px">
                           <MDTypography variant="caption" fontWeight="medium">
                             {data.label}
                           </MDTypography>

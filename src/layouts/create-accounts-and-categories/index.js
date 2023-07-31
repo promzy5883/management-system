@@ -73,7 +73,14 @@ export default function CreateAccountsAndCategories() {
       </div>
     );
   };
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([
+    {
+      categoryName: "Current Assets",
+    },
+    { categoryName: "Current Liabilities" },
+    { categoryName: "Equity" },
+    { categoryName: "Non-Current Liabilities" },
+  ]);
   const [accounts, setAccounts] = useState([]);
   const [categoryModal, setCategoryModal] = useState(false);
   const [accountsModal, setAccountsModal] = useState(false);
@@ -176,52 +183,68 @@ export default function CreateAccountsAndCategories() {
               Create Category
             </MDButton>
           </MDBox>
-          <MDBox width="100%" display="flex" justifyContent="center" marginTop="-50px">
-            <Card
-              sx={{
-                position: "relative",
-                mt: -8,
-                py: 2,
-                px: 2,
-                minWidth: "95%",
-              }}
-            >
-              <MDTypography variant="button" fontWeight="bold">
-                Accounts
-              </MDTypography>
-              <DataTable
-                canSearch={true}
-                table={{
-                  columns: [
-                    { Header: "Account Name", accessor: "Account Name", width: "25%" },
-                    { Header: "Account Type", accessor: "Account Type", width: "30%" },
-                    { Header: "Account Category", accessor: "Account Category", width: "30%" },
-                    { Header: "Action", accessor: "Action" },
-                  ],
-                  rows: [...accountsData],
+          {accounts.length > 0 && (
+            <MDBox width="100%" display="flex" justifyContent="center" marginTop="-50px">
+              <Card
+                sx={{
+                  position: "relative",
+                  mt: -8,
+                  py: 2,
+                  px: 2,
+                  minWidth: "95%",
                 }}
-              />
-              <MDTypography variant="button" fontWeight="bold" marginTop="12px">
-                Categories
-              </MDTypography>
-              <DataTable
-                canSearch={true}
-                table={{
-                  columns: [
-                    { Header: "Category Name", accessor: "Category Name", width: "25%" },
-                    {
-                      Header: "Category Description",
-                      accessor: "Category Description",
-                      width: "30%",
-                    },
-                    { Header: "Sub Category", accessor: "Sub Category", width: "30%" },
-                    { Header: "Action", accessor: "Action" },
-                  ],
-                  rows: [...categoriesData],
+              >
+                <MDTypography variant="button" fontWeight="bold">
+                  Accounts
+                </MDTypography>
+                <DataTable
+                  canSearch={true}
+                  table={{
+                    columns: [
+                      { Header: "Account Name", accessor: "Account Name", width: "25%" },
+                      { Header: "Account Type", accessor: "Account Type", width: "30%" },
+                      { Header: "Account Category", accessor: "Account Category", width: "30%" },
+                      { Header: "Action", accessor: "Action" },
+                    ],
+                    rows: [...accountsData],
+                  }}
+                />
+              </Card>
+            </MDBox>
+          )}
+          {categories.length > 0 && (
+            <MDBox width="100%" display="flex" justifyContent="center" marginTop="-50px">
+              <Card
+                sx={{
+                  position: "relative",
+                  mt: 8,
+                  py: 2,
+                  px: 2,
+                  minWidth: "95%",
                 }}
-              />
-            </Card>
-          </MDBox>
+              >
+                <MDTypography variant="button" fontWeight="bold" marginTop="12px">
+                  Categories
+                </MDTypography>
+                <DataTable
+                  canSearch={true}
+                  table={{
+                    columns: [
+                      { Header: "Category Name", accessor: "Category Name", width: "25%" },
+                      {
+                        Header: "Category Description",
+                        accessor: "Category Description",
+                        width: "30%",
+                      },
+                      { Header: "Sub Category", accessor: "Sub Category", width: "30%" },
+                      { Header: "Action", accessor: "Action" },
+                    ],
+                    rows: [...categoriesData],
+                  }}
+                />
+              </Card>
+            </MDBox>
+          )}
         </MDBox>
       </DashboardLayout>
     </>
