@@ -43,20 +43,24 @@ export default function ItemSettings() {
           flexWrap="wrap"
           rowGap="10px"
           columnGap="10px"
+          justifyContent="center"
         >
           <MDButton
             onClick={() => setSelectedSettings("Brand Name")}
+            color={selectedSettings === "Brand Name" ? "success" : "white"}
             variant={selectedSettings === "Brand Name" ? "contained" : "outlined"}
           >
             Brand Name
           </MDButton>
           <MDButton
+            color={selectedSettings === "Category" ? "success" : "white"}
             onClick={() => setSelectedSettings("Category")}
             variant={selectedSettings === "Category" ? "contained" : "outlined"}
           >
             Category
           </MDButton>
           <MDButton
+            color={selectedSettings === "Item Variation" ? "success" : "white"}
             onClick={() => setSelectedSettings("Item Variation")}
             variant={selectedSettings === "Item Variation" ? "contained" : "outlined"}
           >

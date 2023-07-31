@@ -9,11 +9,12 @@ import {
   Calculate,
   CheckCircleOutline,
   DashboardOutlined,
+  Inventory,
   OtherHousesTwoTone,
   Payment,
+  PaymentOutlined,
   People,
   Person,
-  Person4,
   PersonPin,
   Receipt,
   Settings,
@@ -23,6 +24,8 @@ import SetUpCompanyInfo from "layouts/set-up-company-info";
 import SubscriptionDetails from "layouts/subscription-details";
 import ItemSettings from "layouts/item-settings";
 import ItemLists from "layouts/itemLists";
+import CreateAccountsAndCategories from "layouts/create-accounts-and-categories";
+import ManageBanks from "layouts/manage-banks";
 
 const routes = [
   {
@@ -101,9 +104,27 @@ const routes = [
   {
     isLink: false,
     type: "collapse",
-    name: "Access Business Outlets",
+    name: "Business Outlets",
     key: "access-business-outlets",
     icon: <Business fontSize="medium" color="inherit" />,
+  },
+  {
+    isLink: true,
+    type: "collapse",
+    name: "Inventory",
+    key: "inventory",
+    icon: <Inventory fontSize="medium" />,
+    route: "/inventory",
+    component: <Dashboard color="inherit" />,
+  },
+  {
+    isLink: true,
+    type: "collapse",
+    name: "Sales",
+    key: "sales",
+    icon: <PaymentOutlined fontSize="medium" />,
+    route: "/sales",
+    component: <Dashboard color="inherit" />,
   },
   {
     isLink: "No",
@@ -114,7 +135,7 @@ const routes = [
   {
     isLink: false,
     type: "collapse",
-    name: "Teams Collaboration",
+    name: "Teams, Collaboration",
     key: "teams-collaboration",
     icon: <People fontSize="medium" color="inherit" />,
   },
@@ -190,7 +211,7 @@ export const childrenRoutes = [
     name: "Manage Banks",
     key: "manage-banks",
     route: "/banking-manage-banks",
-    component: <Dashboard />,
+    component: <ManageBanks />,
   },
   {
     isLink: true,
@@ -200,14 +221,7 @@ export const childrenRoutes = [
     route: "/banking-manage-cards",
     component: <Dashboard />,
   },
-  {
-    isLink: true,
-    parent: "banking",
-    name: "Lists",
-    key: "lists",
-    route: "/banking-lists",
-    component: <Dashboard />,
-  },
+
   {
     isLink: true,
     parent: "banking",
@@ -243,10 +257,10 @@ export const childrenRoutes = [
   {
     isLink: true,
     parent: "accounts",
-    name: "Create Accounts & Categories",
-    key: "create-accounts",
-    route: "/accounts-create-accounts",
-    component: <Dashboard />,
+    name: "Create Accounts &, Categories",
+    key: "create-accounts-and-category",
+    route: "/accounts-create-accounts-and-categories",
+    component: <CreateAccountsAndCategories />,
   },
   {
     isLink: true,
@@ -283,7 +297,7 @@ export const childrenRoutes = [
   {
     isLink: true,
     parent: "access-business-outlets",
-    name: "Access Business Outlets",
+    name: "Access Business, Outlets",
     key: "access-business-outlets",
     route: "/access-business-outlets",
     component: <Dashboard />,
@@ -291,7 +305,7 @@ export const childrenRoutes = [
   {
     isLink: true,
     parent: "hrm",
-    name: "Employee Management",
+    name: "Employee, Management",
     key: "employee-management",
     route: "/hrm-employee-management",
     component: <Dashboard />,
@@ -307,7 +321,7 @@ export const childrenRoutes = [
   {
     isLink: true,
     parent: "hrm",
-    name: "Attendance Management",
+    name: "Attendance, Management",
     key: "attendance-management",
     route: "/hrm-attendance-management",
     component: <Dashboard />,
@@ -371,7 +385,7 @@ export const childrenRoutes = [
   {
     isLink: true,
     parent: "teams-collaboration",
-    name: "Manage Projects & Tasks",
+    name: "Manage Projects &, Tasks",
     key: "manage-projects",
     route: "/teams-collaboration-manage-projects",
     component: <Dashboard />,

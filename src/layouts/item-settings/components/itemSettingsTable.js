@@ -32,7 +32,12 @@ export default function ItemSettingsTable({ setting, openModal, closeModal }) {
       <div style={{ position: "relative" }}>
         <button
           onClick={() => toggleMenu(id)}
-          style={{ backgroundColor: "transparent", border: "none", cursor: "pointer" }}
+          style={{
+            backgroundColor: "transparent",
+            border: "none",
+            cursor: "pointer",
+            transform: "rotate(90deg)",
+          }}
         >
           <MDTypography>
             <MoreHoriz color="inherit" />

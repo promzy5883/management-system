@@ -117,12 +117,22 @@ export default function ItemDetails({ no, cancel, data }) {
               <MDTypography variant="caption">
                 UNIT SELLING PRICE:&nbsp;<b>{unit.unitPrice}</b>
               </MDTypography>
-              <MDTypography variant="caption">
-                BAR CODE:&nbsp;<b>{unit.unitBarCode}</b>
-              </MDTypography>
-              <MDTypography variant="caption">
-                MINIMUM STOCK QTY:&nbsp;<b>{unit.minimumStock}</b>
-              </MDTypography>
+
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  gap: "12px",
+                  flexWrap: "wrap",
+                }}
+              >
+                <MDTypography variant="caption">
+                  SKU CODE:&nbsp;<b>{unit.unitBarCode}</b>
+                </MDTypography>
+                <MDTypography variant="caption">
+                  MINIMUM STOCK QTY:&nbsp;<b>{unit.minimumStock}</b>
+                </MDTypography>
+              </div>
             </div>
           );
         })}

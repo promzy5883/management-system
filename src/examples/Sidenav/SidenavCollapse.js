@@ -42,9 +42,7 @@ function SidenavCollapse({ caret, icon, name, active, ...rest }) {
   const [controller] = useMaterialUIController();
   const [isHovered, setIsHovered] = useState(false);
   const { miniSidenav, transparentSidenav, whiteSidenav, darkMode, sidenavColor } = controller;
-  const [letters, setLetters] = useState(
-    name.length < 16 ? [name] : [name.slice(0, 15), name.slice(15)]
-  );
+  const [letters, setLetters] = useState(name.split(","));
 
   let textColor = "white";
 

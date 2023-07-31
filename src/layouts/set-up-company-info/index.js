@@ -15,6 +15,7 @@ export default function SetUpCompanyInfo() {
   const [modalActive, setModalActive] = useState(false);
   const [companyName, setCompanyName] = useState("");
   const [address, setAddress] = useState("");
+  const [adressTwo, setAddressTwo] = useState("");
   const [phone, setPhone] = useState("");
   const [alternativePhone, setAlternativePhone] = useState("");
   const [email, setEmail] = useState("");
@@ -78,6 +79,12 @@ export default function SetUpCompanyInfo() {
                     onChange={(e) => setAddress(e.target.value)}
                     fullWidth
                   />
+                  <MDInput
+                    label="Address Two"
+                    value={adressTwo}
+                    onChange={(e) => setAddressTwo(e.target.value)}
+                    fullWidth
+                  />
 
                   <div style={{ width: "265px" }}>
                     <MDInput
@@ -126,7 +133,7 @@ export default function SetUpCompanyInfo() {
                       fullWidth
                     />
                   </div>
-                  <div style={{ width: "100%", maxWidth: "265px" }}>
+                  <div style={{ width: "100%", maxWidth: "200px" }}>
                     <MDButton color="success" onClick={() => setModalActive(true)} fullWidth>
                       Submit
                     </MDButton>
