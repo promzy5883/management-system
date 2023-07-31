@@ -259,7 +259,7 @@ export const childrenRoutes = [
     parent: "accounts",
     name: "Create Accounts &, Categories",
     key: "create-accounts-and-category",
-    route: "/accounts-create-accounts-and-categories",
+    route: "/create-accounts-and-categories",
     component: <CreateAccountsAndCategories />,
   },
   {
