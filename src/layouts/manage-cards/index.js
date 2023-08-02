@@ -10,23 +10,14 @@ import MDButton from "components/MDButton";
 import DataTable from "examples/Tables/DataTable";
 import MDTypography from "components/MDTypography";
 import { Add, Edit, MoreHoriz } from "@mui/icons-material";
-import AddBank from "./addBankForm";
-import EditBank from "./editBankForm";
+import AddCard from "./addCard";
 
-export default function ManageBanks() {
+export default function ManageCards() {
   const [modalActive, setModalActive] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [addBankModal, setAddBankModal] = useState(false);
-  const [banks, setBanks] = useState([
-    {
-      bankAccountName: "CHIMSON BROTHERS",
-      bankName: "First Bank",
-      accountNumber: 3049122766,
-    },
-  ]);
-  const [banksData, setBanksData] = useState([]);
-  const [dataToEdit, setDataToEdit] = useState({});
-  const [accountNo, setAccountNo] = useState(0);
+  const [cards, setCards] = useState([]);
+  const [cardTableData, setCardTableData] = useState([]);
 
   const EditActionComponent = ({ currentName }) => {
     const id = `${currentName}${Math.random()}`;
@@ -68,7 +59,6 @@ export default function ManageBanks() {
               className="editMenu"
               onClick={() => {
                 toggleMenu(id);
-                setAccountNo(currentName);
               }}
             >
               <MDTypography variant="overline" display="flex" alignItems="center" gap="3px">
@@ -82,49 +72,23 @@ export default function ManageBanks() {
   };
 
   useEffect(() => {
-    if (accountNo !== 0) {
-      setDataToEdit(banks.filter((bank) => bank.accountNumber === accountNo)[0]);
-      setEditModal(true);
-    }
-  }, [accountNo]);
-
-  useEffect(() => {
-    setBanksData(
-      banks.map((data) => {
+    setCardTableData(
+      cards.map((data) => {
         return {
-          "Bank Account Name": data.bankAccountName,
-          "Bank Name": data.bankName,
-          Category: data.category,
-          "Account Number": data.accountNumber,
-          "Branch Name": data.branchName,
+          "Card Name": data.cardName,
+          "Card Number": data.cardNumber,
           Action: <EditActionComponent currentName={data.accountNumber} />,
         };
       })
     );
-  }, [banks]);
+  }, [cards]);
 
   return (
     <>
       {addBankModal && (
-        <AddBank
+        <AddCard
+          submitted={(data) => setAddBankModal(false)}
           cancel={() => setAddBankModal(false)}
-          submitted={(data) => {
-            setBanks([...banks, data]);
-            setAddBankModal(false);
-          }}
-        />
-      )}
-      {editModal && (
-        <EditBank
-          data={dataToEdit}
-          submitted={(data) => {
-            setAccountNo(0);
-            setEditModal(false);
-          }}
-          cancel={() => {
-            setAccountNo(0);
-            setEditModal(false);
-          }}
         />
       )}
       <DashboardLayout>
@@ -177,25 +141,23 @@ export default function ManageBanks() {
                   onClick={() => setAddBankModal(true)}
                 >
                   <Add />
-                  &nbsp; Add Bank
+                  &nbsp; Add Card
                 </MDButton>
               </MDBox>
               <DataTable
                 canSearch={true}
                 table={{
                   columns: [
-                    { Header: "Bank Account Name", accessor: "Bank Account Name", width: "17%" },
+                    { Header: "Card Name", accessor: "Card Name", width: "40%" },
                     {
-                      Header: "Bank Name",
-                      accessor: "Bank Name",
-                      width: "14%",
+                      Header: "Card Number",
+                      accessor: "Card Number",
+                      width: "40%",
                     },
-                    { Header: "Category", accessor: "Category", width: "15%" },
-                    { Header: "Account Number", accessor: "Account Number", width: "20%" },
-                    { Header: "Branch Name", accessor: "Branch Name", width: "19%" },
+
                     { Header: "Action", accessor: "Action" },
                   ],
-                  rows: [...banksData],
+                  rows: [...cardTableData],
                 }}
               />
             </Card>

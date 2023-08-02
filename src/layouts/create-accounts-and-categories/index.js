@@ -8,16 +8,17 @@ import backgroundImage from "assets/images/home-decor-4.jpeg";
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
 import CreateCategory from "./createCategoryModal";
-import CreateAccount from "./createAccountModal";
 import DataTable from "examples/Tables/DataTable";
 import MDTypography from "components/MDTypography";
 import { Edit, MoreHoriz } from "@mui/icons-material";
 import EditComponent from "./edit";
+import CreateAccount from "./createAccountModal";
 
 export default function CreateAccountsAndCategories() {
   const [modalActive, setModalActive] = useState(false);
   const [initialName, setInitialName] = useState("");
   const [editType, setEditType] = useState("Account");
+  const [selectedMenu, setSelectedMenu] = useState("Accounts");
   const [editModal, setEditModal] = useState(false);
   const EditActionComponent = ({ currentName, type }) => {
     const id = `${currentName}${Math.random()}`;
@@ -74,31 +75,35 @@ export default function CreateAccountsAndCategories() {
     );
   };
   const [categories, setCategories] = useState([
+    { categoryName: "None" },
     {
-      categoryName: "Current Assets",
+      categoryName: "Sales",
+      categoryDescription: "Non-items based sales",
     },
-    { categoryName: "Current Liabilities" },
-    { categoryName: "Equity" },
-    { categoryName: "Non-Current Liabilities" },
+    {
+      categoryName: "Cost of Sales",
+      categoryDescription: "Any cost associated with sales. Used to calculate gross profit.",
+    },
+    {
+      categoryName: "Other Income",
+      categoryDescription: "Income received such as interest and discount received.",
+    },
+    {
+      categoryName: "Expenses",
+      categoryDescription: "Cost incurred, Advertising, rent, stationary, and so on.",
+    },
   ]);
-  const [accounts, setAccounts] = useState([]);
+  const [accounts, setAccounts] = useState([
+    { accountName: "Assets" },
+    { accountName: "Liability" },
+    { accountName: "Expense" },
+    { accountName: "Bank Account" },
+    { accountName: "Equity" },
+  ]);
   const [categoryModal, setCategoryModal] = useState(false);
   const [accountsModal, setAccountsModal] = useState(false);
-  const [accountsData, setAccountsData] = useState([]);
+  const [accountsTableData, setAccountsTableData] = useState([]);
   const [categoriesData, setCategoriesData] = useState([]);
-
-  useEffect(() => {
-    setAccountsData(
-      accounts.map((data) => {
-        return {
-          "Account Name": data.accountName,
-          "Account Type": data.accountType,
-          "Account Category": data.accountCategory,
-          Action: <EditActionComponent currentName={data.accountName} type="Account" />,
-        };
-      })
-    );
-  }, [accounts]);
 
   useEffect(() => {
     setCategoriesData(
@@ -106,12 +111,24 @@ export default function CreateAccountsAndCategories() {
         return {
           "Category Name": data.categoryName,
           "Category Description": data.categoryDescription,
-          "Sub Category": data.subCategory,
+          Account: data.account,
           Action: <EditActionComponent currentName={data.categoryName} type="Category" />,
         };
       })
     );
   }, [categories]);
+
+  useEffect(() => {
+    setAccountsTableData(
+      accounts.map((data) => {
+        return {
+          "Account Name": data.accountName,
+          key: `${data.accountName}${Math.random()}`,
+          Action: <EditActionComponent currentName={data.key} type="Accounts" />,
+        };
+      })
+    );
+  }, [accounts]);
 
   return (
     <>
@@ -121,13 +138,13 @@ export default function CreateAccountsAndCategories() {
             setCategories([...categories, data]);
             setCategoryModal(false);
           }}
+          accounts={accounts}
           cancel={() => setCategoryModal(false)}
         />
       )}
       {accountsModal && (
         <CreateAccount
           cancel={() => setAccountsModal(false)}
-          category={categories}
           submitted={(data) => {
             setAccounts([...accounts, data]);
             setAccountsModal(false);
@@ -137,6 +154,7 @@ export default function CreateAccountsAndCategories() {
       {editModal && (
         <EditComponent
           type={editType}
+          accounts={accounts}
           categoryData={categories}
           accountData={accounts}
           cancel={() => setEditModal(false)}
@@ -176,56 +194,59 @@ export default function CreateAccountsAndCategories() {
             columnGap="10px"
             justifyContent="center"
           >
-            <MDButton color="success" onClick={() => setAccountsModal(true)}>
-              Create Account
+            <MDButton
+              color={selectedMenu === "Accounts" ? "success" : "white"}
+              variant={selectedMenu === "Accounts" ? "contained" : "outlined"}
+              onClick={() => setSelectedMenu("Accounts")}
+            >
+              Account
             </MDButton>
-            <MDButton color="success" onClick={() => setCategoryModal(true)}>
-              Create Category
+            <MDButton
+              onClick={() => setSelectedMenu("Category")}
+              variant={selectedMenu === "Category" ? "contained" : "outlined"}
+              color={selectedMenu === "Category" ? "success" : "white"}
+            >
+              Category
             </MDButton>
           </MDBox>
-          {accounts.length > 0 && (
-            <MDBox width="100%" display="flex" justifyContent="center" marginTop="-50px">
-              <Card
-                sx={{
-                  position: "relative",
-                  mt: -8,
-                  py: 2,
-                  px: 2,
-                  minWidth: "95%",
-                }}
-              >
-                <MDTypography variant="button" fontWeight="bold">
-                  Accounts
-                </MDTypography>
+
+          <MDBox width="100%" display="flex" justifyContent="center" marginTop="-50px">
+            <Card
+              sx={{
+                position: "relative",
+                mt: -8,
+                py: 2,
+                px: 2,
+                minWidth: "95%",
+              }}
+            >
+              <MDBox width="200px">
+                {selectedMenu === "Accounts" && (
+                  <MDButton color="success" onClick={() => setAccountsModal(true)}>
+                    Add Account
+                  </MDButton>
+                )}
+                {selectedMenu === "Category" && (
+                  <MDButton color="success" onClick={() => setCategoryModal(true)}>
+                    Add Category
+                  </MDButton>
+                )}
+              </MDBox>
+
+              {selectedMenu === "Accounts" && (
                 <DataTable
                   canSearch={true}
                   table={{
                     columns: [
-                      { Header: "Account Name", accessor: "Account Name", width: "25%" },
-                      { Header: "Account Type", accessor: "Account Type", width: "30%" },
-                      { Header: "Account Category", accessor: "Account Category", width: "30%" },
+                      { Header: "Account Name", accessor: "Account Name", width: "80%" },
+
                       { Header: "Action", accessor: "Action" },
                     ],
-                    rows: [...accountsData],
+                    rows: [...accountsTableData],
                   }}
                 />
-              </Card>
-            </MDBox>
-          )}
-          {categories.length > 0 && (
-            <MDBox width="100%" display="flex" justifyContent="center" marginTop="-50px">
-              <Card
-                sx={{
-                  position: "relative",
-                  mt: 8,
-                  py: 2,
-                  px: 2,
-                  minWidth: "95%",
-                }}
-              >
-                <MDTypography variant="button" fontWeight="bold" marginTop="12px">
-                  Categories
-                </MDTypography>
+              )}
+              {selectedMenu === "Category" && (
                 <DataTable
                   canSearch={true}
                   table={{
@@ -236,15 +257,15 @@ export default function CreateAccountsAndCategories() {
                         accessor: "Category Description",
                         width: "30%",
                       },
-                      { Header: "Sub Category", accessor: "Sub Category", width: "30%" },
+                      { Header: "Account", accessor: "Account", width: "30%" },
                       { Header: "Action", accessor: "Action" },
                     ],
                     rows: [...categoriesData],
                   }}
                 />
-              </Card>
-            </MDBox>
-          )}
+              )}
+            </Card>
+          </MDBox>
         </MDBox>
       </DashboardLayout>
     </>

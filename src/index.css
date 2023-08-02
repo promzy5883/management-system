@@ -18,3 +18,19 @@
     display: flex;
     justify-content: center;
 }
+.menuSelect,.menuSelectActive{
+    width: 100%;
+    height: auto;
+    padding: 2px 8px 2px 8px;
+    cursor: pointer;
+    display:flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.menuSelectActive{
+    background-color: rgb(52, 52, 212);
+}
+.menuSelect:hover{
+    background-color: rgba(204, 197, 197,0.5);
+    
+}

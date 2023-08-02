@@ -69,7 +69,7 @@ export default function AddBank({ submitted, cancel }) {
     <div className="addSettingModal" style={{ alignItems: "center" }}>
       <Card
         sx={{
-          maxWidth: "680px",
+          maxWidth: "710px",
           width: "90%",
           p: 2,
           height: "480px",

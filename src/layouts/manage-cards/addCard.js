@@ -7,24 +7,24 @@ import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
 import { Close } from "@mui/icons-material";
 
-export default function EditBank({ data, submitted, cancel }) {
+export default function AddCard({ submitted, cancel }) {
   const [position, setPosition] = useState(0);
 
-  const [bankAccountName, setBankAccountName] = useState(data.bankAccountName);
-  const [bankName, setBankName] = useState(data.bankName);
-  const [categoryValue, setCategoryValue] = useState(data.category);
-  const [accountNumber, setAccountNumber] = useState(data.accountNumber);
-  const [branchName, setBranchName] = useState(data.branchName);
-  const [branchCode, setBranchCode] = useState(data.branchCode);
+  const [bankAccountName, setBankAccountName] = useState("");
+  const [bankName, setBankName] = useState("");
+  const [categoryValue, setCategoryValue] = useState("");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [branchName, setBranchName] = useState("");
+  const [branchCode, setBranchCode] = useState("");
   const [openingBalanceForm, setOPeningBalanceForm] = useState([
-    { label: "Date", type: "date", value: data.Date },
-    { label: "Account", type: "select", value: data.Account },
-    { label: "Contra", type: "text", value: data.Contra },
-    { label: "Contra Account", type: "text", value: data["Contra Account"] },
-    { label: "Project Payee", type: "text", value: data["Project Payee"] },
-    { label: "Description", type: "text", value: data.Description },
-    { label: "Debit", type: "text", value: data.Debit },
-    { label: "Credit", type: "text", value: data.Credit },
+    { label: "Date", type: "date", value: "" },
+    { label: "Account", type: "select", value: "" },
+    { label: "Contra", type: "text", value: "" },
+    { label: "Contra Account", type: "text", value: "" },
+    { label: "Project Payee", type: "text", value: "" },
+    { label: "Description", type: "text", value: "" },
+    { label: "Debit", type: "text", value: "" },
+    { label: "Credit", type: "text", value: "" },
   ]);
 
   const categories = [
@@ -65,7 +65,6 @@ export default function EditBank({ data, submitted, cancel }) {
   };
 
   useEffect(() => setPosition(1), []);
-  useEffect(() => console.log(data), []);
   return (
     <div className="addSettingModal" style={{ alignItems: "center" }}>
       <Card
@@ -89,7 +88,7 @@ export default function EditBank({ data, submitted, cancel }) {
           alignItems="center"
           marginBottom="8px"
         >
-          EDIT BANK
+          ADD CARD
           <button
             onClick={() => cancel()}
             style={{ border: "none", backgroundColor: "transparent", cursor: "pointer" }}
@@ -191,6 +190,7 @@ export default function EditBank({ data, submitted, cancel }) {
             />
           </div>
         </MDBox>
+
         <div
           style={{
             width: "100%",
@@ -277,7 +277,7 @@ export default function EditBank({ data, submitted, cancel }) {
 
         <MDBox width="100%" marginTop="14px">
           <MDButton color="success" onClick={handleSubmit}>
-            Edit Bank
+            Add Card
           </MDButton>
         </MDBox>
       </Card>

@@ -5,18 +5,19 @@ import MDTypography from "components/MDTypography";
 import MDBox from "components/MDBox";
 import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
-import { Close } from "@mui/icons-material";
+import { ArrowDropDown, Close } from "@mui/icons-material";
 
 export default function EditComponent({
   submitted,
   cancel,
   type,
   categoryData,
+  ledgerData,
   accountData,
   currentName,
+  accounts,
 }) {
   const [position, setPosition] = useState(type === "Category" ? -300 : -350);
-  const [accounts, setAccounts] = useState([]);
 
   const [name, setName] = useState(
     type === "Category" &&
@@ -26,22 +27,37 @@ export default function EditComponent({
     type === "Category" &&
       categoryData.filter((data) => data.categoryName === currentName)[0].categoryDescription
   );
-  const [subCategory, setSubCategory] = useState(
+  const [categoryAccount, setCategoryAccount] = useState(
     type === "Category" &&
-      categoryData.filter((data) => data.categoryName === currentName)[0].subCategory
+      categoryData.filter((data) => data.categoryName === currentName)[0].account
   );
 
-  const [accountName, setAccountName] = useState(
-    type === "Account" &&
-      accountData.filter((data) => data.accountName === currentName)[0].accountName
+  const [accountsName, setAccountsName] = useState(
+    type === "Accounts" && accountData.filter((data) => data.key === currentName)[0].accountName
+  );
+
+  const [ledgerName, setLedgerName] = useState(
+    type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].ledgerName
+      ? type === "Ledger" &&
+          ledgerData.filter((data) => data.ledgerName === currentName)[0].ledgerName
+      : ""
   );
   const [accountType, setAccountType] = useState(
-    type === "Account" &&
-      accountData.filter((data) => data.accountName === currentName)[0].accountType
+    type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].accountType
+      ? type === "Ledger" &&
+          ledgerData.filter((data) => data.ledgerName === currentName)[0].accountType
+      : ""
+  );
+  const [account, setAccount] = useState(
+    type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].account
+      ? type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].account
+      : ""
   );
   const [categoryValue, setCategoryValue] = useState(
-    type === "Account" &&
-      accountData.filter((data) => data.accountName === currentName)[0].categoryValue
+    type === "Ledger" &&
+      ledgerData.filter((data) => data.ledgerName === currentName)[0].categoryValue
+      ? ledgerData.filter((data) => data.ledgerName === currentName)[0].categoryValue
+      : ""
   );
 
   const [openingBalanceForm, setOPeningBalanceForm] = useState([
@@ -49,57 +65,72 @@ export default function EditComponent({
       label: "Date",
       type: "date",
       value:
-        type === "Account" &&
-        accountData.filter((data) => data.accountName === currentName)[0].Date,
+        type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].Date
+          ? type === "Ledger" &&
+            ledgerData.filter((data) => data.ledgerName === currentName)[0].Date
+          : "",
     },
     {
       label: "Account",
       type: "select",
       value:
-        type === "Account" &&
-        accountData.filter((data) => data.accountName === currentName)[0].Account,
+        type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].Account
+          ? ledgerData.filter((data) => data.ledgerName === currentName)[0].Account
+          : "",
     },
     {
       label: "Contra",
       type: "text",
       value:
-        type === "Account" &&
-        accountData.filter((data) => data.accountName === currentName)[0].Contra,
+        type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].Contra
+          ? type === "Ledger" &&
+            ledgerData.filter((data) => data.ledgerName === currentName)[0].Contra
+          : "",
     },
     {
       label: "Contra Account",
       type: "text",
       value:
-        type === "Account" &&
-        accountData.filter((data) => data.accountName === currentName)[0]["Contra Account"],
+        type === "Ledger" &&
+        ledgerData.filter((data) => data.ledgerName === currentName)[0]["Contra Account"]
+          ? ledgerData.filter((data) => data.ledgerName === currentName)[0]["Contra Account"]
+          : "",
     },
     {
       label: "Project Payee",
       type: "text",
       value:
-        type === "Account" &&
-        accountData.filter((data) => data.accountName === currentName)[0]["Project Payee"],
+        type === "Ledger" &&
+        ledgerData.filter((data) => data.ledgerName === currentName)[0]["Project Payee"]
+          ? ledgerData.filter((data) => data.ledgerName === currentName)[0]["Project Payee"]
+          : "",
     },
     {
       label: "Description",
       type: "text",
       value:
-        type === "Account" &&
-        accountData.filter((data) => data.accountName === currentName)[0].Description,
+        type === "Ledger" &&
+        ledgerData.filter((data) => data.ledgerName === currentName)[0].Description
+          ? ledgerData.filter((data) => data.ledgerName === currentName)[0].Description
+          : "",
     },
     {
       label: "Debit",
       type: "text",
       value:
-        type === "Account" &&
-        accountData.filter((data) => data.accountName === currentName)[0].Debit,
+        type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].Debit
+          ? type === "Ledger" &&
+            ledgerData.filter((data) => data.ledgerName === currentName)[0].Debit
+          : "",
     },
     {
       label: "Credit",
       type: "text",
       value:
-        type === "Account" &&
-        accountData.filter((data) => data.accountName === currentName)[0].Credit,
+        type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].Credit
+          ? type === "Ledger" &&
+            ledgerData.filter((data) => data.ledgerName === currentName)[0].Credit
+          : "",
     },
   ]);
 
@@ -115,15 +146,30 @@ export default function EditComponent({
     );
   };
 
+  const generateHeight = () => {
+    if (type === "Category") return "300px";
+    if (type === "Ledger") return "360px";
+    if (type === "Accounts") return "180px";
+  };
+
+  const toggleCategoryMenu = () => {
+    let elem = document.getElementById("categoryMenuEdit");
+    if (elem.style.display !== "flex") {
+      elem.style.display = "flex";
+    } else {
+      elem.style.display = "none";
+    }
+  };
+
   useEffect(() => setPosition(50), []);
   return (
     <div className="addSettingModal">
       <Card
         sx={{
-          maxWidth: "450px",
+          maxWidth: `${type === "Ledger" ? "710px" : "450px"}`,
           width: "90%",
           p: 2,
-          height: `${type === "Category" ? "280px" : "330px"}`,
+          height: `${generateHeight()}`,
           transition: "0.4s",
           transform: `translateY(${position}px)`,
           zIndex: 20,
@@ -163,25 +209,92 @@ export default function EditComponent({
               onChange={(e) => setDescription(e.target.value)}
               fullWidth
             />
-            <MDInput
-              label="Sub Category"
-              value={subCategory}
-              onChange={(e) => setSubCategory(e.target.value)}
-              fullWidth
-            />
-          </MDBox>
-        )}
-        {type === "Account" && (
-          <MDBox width="100%" display="flex" flexDirection="column" gap="8px">
-            <MDInput
-              label="Account Name"
-              value={accountName}
-              onChange={(e) => setAccountName(e.target.value)}
-              fullWidth
-            />
             <MDBox>
               <MDTypography variant="caption" fontWeight="medium" margin="0px 8px 0px 0px">
-                TYPE
+                ACCOUNT
+              </MDTypography>
+              <select
+                value={categoryAccount}
+                onChange={(e) => setCategoryAccount(e.target.value)}
+                style={{
+                  width: "100%",
+                  outline: "none",
+                  border: "1px solid rgb(230, 226, 226)",
+                  borderRadius: "5px",
+                  fontSize: "11px",
+                  color: "rgba(0,0,0,0.7)",
+                  minHeight: "40px",
+                  paddingLeft: "6px",
+                }}
+              >
+                <option style={{ color: "gray", fontSize: "14px" }}>
+                  <MDTypography variant="caption">SELECT ACCOUNT</MDTypography>
+                </option>
+                {accounts.map((data) => {
+                  return (
+                    <option style={{ color: "gray", fontSize: "14px" }}>
+                      <MDTypography variant="caption">
+                        {data.accountName.toUpperCase()}
+                      </MDTypography>
+                    </option>
+                  );
+                })}
+              </select>
+            </MDBox>
+          </MDBox>
+        )}
+        {type === "Ledger" && (
+          <MDBox width="100%" display="flex" flexDirection="column" gap="8px">
+            <div
+              style={{
+                width: "100%",
+                display: "grid",
+                gridTemplateColumns: "48% 48%",
+                justifyContent: "space-between",
+                alignItems: "end",
+              }}
+            >
+              <MDBox>
+                <MDTypography variant="caption" fontWeight="medium" margin="0px 8px 0px 0px">
+                  ACCOUNT
+                </MDTypography>
+                <select
+                  value={account}
+                  onChange={(e) => setAccount(e.target.value)}
+                  style={{
+                    width: "100%",
+                    outline: "none",
+                    border: "1px solid rgb(230, 226, 226)",
+                    borderRadius: "5px",
+                    fontSize: "11px",
+                    color: "rgba(0,0,0,0.7)",
+                    minHeight: "40px",
+                    paddingLeft: "6px",
+                  }}
+                >
+                  <option style={{ color: "gray", fontSize: "14px" }}>
+                    <MDTypography variant="caption">SELECT ACCOUNT</MDTypography>
+                  </option>
+                  {accountData.map((data) => {
+                    return (
+                      <option style={{ color: "gray", fontSize: "14px" }}>
+                        <MDTypography variant="caption">
+                          {data.accountName.toUpperCase()}
+                        </MDTypography>
+                      </option>
+                    );
+                  })}
+                </select>
+              </MDBox>
+              <MDInput
+                label="Ledger Name"
+                value={ledgerName}
+                onChange={(e) => setLedgerName(e.target.value)}
+              />
+            </div>
+            <MDBox>
+              <MDTypography variant="caption" fontWeight="medium" margin="0px 8px 0px 0px">
+                MODULE
               </MDTypography>
               <select
                 value={accountType}
@@ -215,33 +328,94 @@ export default function EditComponent({
               <MDTypography variant="caption" fontWeight="medium" margin="0px 8px 0px 0px">
                 CATEGORY
               </MDTypography>
-              <select
-                value={categoryValue}
-                onChange={(e) => setCategoryValue(e.target.value)}
-                style={{
-                  width: "100%",
-                  outline: "none",
-                  border: "1px solid rgb(230, 226, 226)",
-                  borderRadius: "5px",
-                  fontSize: "11px",
-                  color: "rgba(0,0,0,0.7)",
-                  minHeight: "40px",
-                  paddingLeft: "6px",
-                }}
-              >
-                <option style={{ color: "gray", fontSize: "14px" }}>
-                  <MDTypography variant="caption">SELECT CATEGORY</MDTypography>
-                </option>
-                {categoryData.map((data) => {
-                  return (
-                    <option style={{ color: "gray", fontSize: "14px" }}>
-                      <MDTypography variant="caption">
-                        {data.categoryName.toUpperCase()}
-                      </MDTypography>
-                    </option>
-                  );
-                })}
-              </select>
+              <div style={{ position: "relative", width: "100%" }}>
+                <div
+                  onClick={() => toggleCategoryMenu()}
+                  style={{
+                    width: "100%",
+                    border: "1px solid rgb(230, 226, 226)",
+                    borderRadius: "5px",
+                    minHeight: "40px",
+                    padding: "0px 6px 0px 6px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    cursor: "pointer",
+                  }}
+                >
+                  <MDTypography variant="caption">
+                    {categoryValue !== "" ? categoryValue.toUpperCase() : "SELECT"}
+                  </MDTypography>
+                  <MDTypography>
+                    <ArrowDropDown />
+                  </MDTypography>
+                </div>
+                <div
+                  id="categoryMenuEdit"
+                  style={{
+                    width: "100%",
+                    position: "absolute",
+                    top: "42px",
+                    height: "auto",
+                    maxHeight: "150px",
+                    overflowY: "scroll",
+                    border: "1px solid rgb(230, 226, 226)",
+                    borderRadius: "5px",
+                    display: "none",
+                    flexDirection: "column",
+                    backgroundColor: "white",
+                    zIndex: "10",
+                  }}
+                >
+                  {categoryData.map((data) => {
+                    return data.categoryName !== categoryValue ? (
+                      <div
+                        onClick={() => {
+                          setCategoryValue(data.categoryName);
+                          toggleCategoryMenu();
+                        }}
+                        key={data.categoryName}
+                        className="menuSelect"
+                      >
+                        <MDTypography
+                          color={data.categoryName === categoryValue ? "white" : "inherit"}
+                          variant="button"
+                        >
+                          {data.categoryName}
+                        </MDTypography>
+                        <MDTypography
+                          color={data.categoryName === categoryValue ? "white" : "inherit"}
+                          variant="caption"
+                        >
+                          <i>{data.categoryDescription}</i>
+                        </MDTypography>
+                      </div>
+                    ) : (
+                      <div
+                        onClick={() => {
+                          setCategoryValue(data.categoryName);
+                          toggleCategoryMenu();
+                        }}
+                        key={data.categoryName}
+                        className="menuSelectActive"
+                      >
+                        <MDTypography
+                          color={data.categoryName === categoryValue ? "white" : "inherit"}
+                          variant="button"
+                        >
+                          {data.categoryName}
+                        </MDTypography>
+                        <MDTypography
+                          color={data.categoryName === categoryValue ? "white" : "inherit"}
+                          variant="caption"
+                        >
+                          <i>{data.categoryDescription}</i>
+                        </MDTypography>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </MDBox>
             <div
               style={{
@@ -258,12 +432,14 @@ export default function EditComponent({
                   overflowX: "scroll",
                 }}
               >
-                <div style={{ display: "flex", gap: "10px", alignItems: "end", width: "1150px" }}>
+                <div
+                  style={{ display: "flex", gap: "10px", alignItems: "flex-end", width: "670px" }}
+                >
                   {openingBalanceForm.map((data) => {
                     return (
                       <>
                         {data.type !== "date" && data.type !== "select" && (
-                          <MDBox width="135px">
+                          <MDBox width="80px">
                             <MDInput
                               type={data.type}
                               label={data.label}
@@ -274,7 +450,7 @@ export default function EditComponent({
                           </MDBox>
                         )}
                         {data.type === "select" && (
-                          <MDBox width="140px">
+                          <MDBox width="80px">
                             <MDTypography variant="caption" fontWeight="medium">
                               {data.label}
                             </MDTypography>
@@ -308,7 +484,7 @@ export default function EditComponent({
                           </MDBox>
                         )}
                         {data.type === "date" && (
-                          <MDBox width="135px">
+                          <MDBox width="80px">
                             <MDTypography variant="caption" fontWeight="medium">
                               {data.label}
                             </MDTypography>
@@ -326,6 +502,16 @@ export default function EditComponent({
                 </div>
               </div>
             </div>
+          </MDBox>
+        )}
+        {type === "Accounts" && (
+          <MDBox width="100%" display="flex" flexDirection="column" gap="8px">
+            <MDInput
+              label="Account Name"
+              value={accountsName}
+              onChange={(e) => setAccountsName(e.target.value)}
+              fullWidth
+            />
           </MDBox>
         )}
         <MDBox width="100%" marginTop="14px">

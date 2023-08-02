@@ -7,27 +7,17 @@ import Card from "@mui/material/Card";
 import backgroundImage from "assets/images/home-decor-4.jpeg";
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
+import CreateLedger from "layouts/create-accounts-and-categories/createLedgerModal";
 import DataTable from "examples/Tables/DataTable";
 import MDTypography from "components/MDTypography";
-import { Add, Edit, MoreHoriz } from "@mui/icons-material";
-import AddBank from "./addBankForm";
-import EditBank from "./editBankForm";
+import { Edit, MoreHoriz } from "@mui/icons-material";
+import EditComponent from "layouts/create-accounts-and-categories/edit";
 
-export default function ManageBanks() {
+export default function CreateLedgers() {
   const [modalActive, setModalActive] = useState(false);
+  const [initialName, setInitialName] = useState("");
   const [editModal, setEditModal] = useState(false);
-  const [addBankModal, setAddBankModal] = useState(false);
-  const [banks, setBanks] = useState([
-    {
-      bankAccountName: "CHIMSON BROTHERS",
-      bankName: "First Bank",
-      accountNumber: 3049122766,
-    },
-  ]);
-  const [banksData, setBanksData] = useState([]);
-  const [dataToEdit, setDataToEdit] = useState({});
-  const [accountNo, setAccountNo] = useState(0);
-
+  const [ledgerModal, setLedgerModal] = useState(false);
   const EditActionComponent = ({ currentName }) => {
     const id = `${currentName}${Math.random()}`;
 
@@ -68,7 +58,8 @@ export default function ManageBanks() {
               className="editMenu"
               onClick={() => {
                 toggleMenu(id);
-                setAccountNo(currentName);
+                setInitialName(currentName);
+                setEditModal(true);
               }}
             >
               <MDTypography variant="overline" display="flex" alignItems="center" gap="3px">
@@ -80,51 +71,77 @@ export default function ManageBanks() {
       </div>
     );
   };
+  const [categories, setCategories] = useState([
+    { categoryName: "None" },
+    {
+      categoryName: "Sales",
+      categoryDescription: "Non-items based sales",
+    },
+    {
+      categoryName: "Cost of Sales",
+      categoryDescription: "Any cost associated with sales. Used to calculate gross profit.",
+    },
+    {
+      categoryName: "Other Income",
+      categoryDescription: "Income received such as interest and discount received.",
+    },
+    {
+      categoryName: "Expenses",
+      categoryDescription: "Cost incurred, Advertising, rent, stationary, and so on.",
+    },
+  ]);
+  const [accounts, setAccounts] = useState([
+    { accountName: "Assets" },
+    { accountName: "Liability" },
+    { accountName: "Expense" },
+    { accountName: "Bank Account" },
+    { accountName: "Equity" },
+  ]);
+  const [ledgers, setLedgers] = useState([
+    { ledgerName: "Repair & Maintenance", accountType: "GL" },
+    { ledgerName: "Wages & Salary", accountType: "GL" },
+    { ledgerName: "Government Levy", accountType: "GL" },
+  ]);
+  const [ledgerTableData, setLedgerTableData] = useState([]);
 
   useEffect(() => {
-    if (accountNo !== 0) {
-      setDataToEdit(banks.filter((bank) => bank.accountNumber === accountNo)[0]);
-      setEditModal(true);
-    }
-  }, [accountNo]);
-
-  useEffect(() => {
-    setBanksData(
-      banks.map((data) => {
+    setLedgerTableData(
+      ledgers.map((data) => {
         return {
-          "Bank Account Name": data.bankAccountName,
-          "Bank Name": data.bankName,
+          "Ledger Name": data.ledgerName,
+          Module: data.accountType,
+          Account: data.account,
           Category: data.category,
-          "Account Number": data.accountNumber,
-          "Branch Name": data.branchName,
-          Action: <EditActionComponent currentName={data.accountNumber} />,
+          Action: <EditActionComponent currentName={data.ledgerName} />,
         };
       })
     );
-  }, [banks]);
+  }, [ledgers]);
 
   return (
     <>
-      {addBankModal && (
-        <AddBank
-          cancel={() => setAddBankModal(false)}
+      {ledgerModal && (
+        <CreateLedger
+          cancel={() => setLedgerModal(false)}
+          category={categories}
+          accounts={accounts}
           submitted={(data) => {
-            setBanks([...banks, data]);
-            setAddBankModal(false);
+            setLedgers([...accounts, data]);
+            setLedgerModal(false);
           }}
         />
       )}
+
       {editModal && (
-        <EditBank
-          data={dataToEdit}
-          submitted={(data) => {
-            setAccountNo(0);
-            setEditModal(false);
-          }}
-          cancel={() => {
-            setAccountNo(0);
-            setEditModal(false);
-          }}
+        <EditComponent
+          type="Ledger"
+          accounts={accounts}
+          categoryData={categories}
+          accountData={accounts}
+          ledgerData={ledgers}
+          cancel={() => setEditModal(false)}
+          submitted={(data) => setEditModal(false)}
+          currentName={initialName}
         />
       )}
       <DashboardLayout>
@@ -147,18 +164,7 @@ export default function ManageBanks() {
               overflow: "hidden",
             }}
           />
-          <MDBox
-            width="90%"
-            display="flex"
-            flexDirection="row"
-            position="absolute"
-            top="22px"
-            left="20px"
-            flexWrap="wrap"
-            rowGap="10px"
-            columnGap="10px"
-            justifyContent="center"
-          ></MDBox>
+
           <MDBox width="100%" display="flex" justifyContent="center" marginTop="-50px">
             <Card
               sx={{
@@ -169,33 +175,23 @@ export default function ManageBanks() {
                 minWidth: "95%",
               }}
             >
-              <MDBox width="170px">
-                <MDButton
-                  color="success"
-                  display="flex"
-                  alignItems="center"
-                  onClick={() => setAddBankModal(true)}
-                >
-                  <Add />
-                  &nbsp; Add Bank
+              <MDBox width="200px">
+                <MDButton color="success" onClick={() => setLedgerModal(true)}>
+                  Add Ledger
                 </MDButton>
               </MDBox>
+
               <DataTable
                 canSearch={true}
                 table={{
                   columns: [
-                    { Header: "Bank Account Name", accessor: "Bank Account Name", width: "17%" },
-                    {
-                      Header: "Bank Name",
-                      accessor: "Bank Name",
-                      width: "14%",
-                    },
-                    { Header: "Category", accessor: "Category", width: "15%" },
-                    { Header: "Account Number", accessor: "Account Number", width: "20%" },
-                    { Header: "Branch Name", accessor: "Branch Name", width: "19%" },
+                    { Header: "Ledger Name", accessor: "Ledger Name", width: "22%" },
+                    { Header: "Module", accessor: "Module", width: "22%" },
+                    { Header: "Account", accessor: "Account", width: "22%" },
+                    { Header: "Category", accessor: "Category", width: "22%" },
                     { Header: "Action", accessor: "Action" },
                   ],
-                  rows: [...banksData],
+                  rows: [...ledgerTableData],
                 }}
               />
             </Card>

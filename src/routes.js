@@ -26,6 +26,8 @@ import ItemSettings from "layouts/item-settings";
 import ItemLists from "layouts/itemLists";
 import CreateAccountsAndCategories from "layouts/create-accounts-and-categories";
 import ManageBanks from "layouts/manage-banks";
+import ManageCards from "layouts/manage-cards";
+import CreateLedgers from "layouts/create-ledgers";
 
 const routes = [
   {
@@ -180,10 +182,10 @@ const routes = [
   {
     isLink: true,
     type: "collapse",
-    name: "Admin Settings",
-    key: "admin-settings",
+    name: "Console",
+    key: "console",
     icon: <Settings color="inherit" fontSize="medium" />,
-    route: "/admin-settings",
+    route: "/console",
     component: <Dashboard />,
   },
 ];
@@ -219,17 +221,9 @@ export const childrenRoutes = [
     name: "Manage Cards",
     key: "manage-cards",
     route: "/banking-manage-cards",
-    component: <Dashboard />,
+    component: <ManageCards />,
   },
 
-  {
-    isLink: true,
-    parent: "banking",
-    name: "Cash Movement",
-    key: "cash-movement",
-    route: "/banking-cash-movement",
-    component: <Dashboard />,
-  },
   {
     isLink: true,
     parent: "banking",
@@ -265,9 +259,33 @@ export const childrenRoutes = [
   {
     isLink: true,
     parent: "accounts",
+    name: "Create Ledgers",
+    key: "create-ledgers",
+    route: "/create-ledgers",
+    component: <CreateLedgers />,
+  },
+  {
+    isLink: true,
+    parent: "accounts",
     name: "Enquiries",
     key: "enquiries",
     route: "/accounts-enquiries",
+    component: <Dashboard />,
+  },
+  {
+    isLink: true,
+    parent: "accounts",
+    name: "Journals",
+    key: "journals",
+    route: "/accounts-journals",
+    component: <Dashboard />,
+  },
+  {
+    isLink: true,
+    parent: "accounts",
+    name: "Cash Lodgements",
+    key: "cash-lodgments",
+    route: "/cash-lodgements",
     component: <Dashboard />,
   },
   {
