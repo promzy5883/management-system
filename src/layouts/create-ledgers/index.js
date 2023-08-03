@@ -72,7 +72,7 @@ export default function CreateLedgers() {
     );
   };
   const [categories, setCategories] = useState([
-    { categoryName: "None" },
+    { categoryName: "None", categoryDescription: "No Category" },
     {
       categoryName: "Sales",
       categoryDescription: "Non-items based sales",

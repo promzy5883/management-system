@@ -17,7 +17,9 @@ export default function EditComponent({
   currentName,
   accounts,
 }) {
-  const [position, setPosition] = useState(type === "Category" ? -300 : -350);
+  const [position, setPosition] = useState(
+    type === "Category" || type === "Accounts" ? -300 : -520
+  );
 
   const [name, setName] = useState(
     type === "Category" &&
@@ -148,7 +150,7 @@ export default function EditComponent({
 
   const generateHeight = () => {
     if (type === "Category") return "300px";
-    if (type === "Ledger") return "360px";
+    if (type === "Ledger") return "515px";
     if (type === "Accounts") return "180px";
   };
 
@@ -213,7 +215,8 @@ export default function EditComponent({
               <MDTypography variant="caption" fontWeight="medium" margin="0px 8px 0px 0px">
                 ACCOUNT
               </MDTypography>
-              <select
+              <MDBox
+                component="select"
                 value={categoryAccount}
                 onChange={(e) => setCategoryAccount(e.target.value)}
                 style={{
@@ -221,25 +224,23 @@ export default function EditComponent({
                   outline: "none",
                   border: "1px solid rgb(230, 226, 226)",
                   borderRadius: "5px",
-                  fontSize: "11px",
-                  color: "rgba(0,0,0,0.7)",
+                  fontSize: "12px",
                   minHeight: "40px",
                   paddingLeft: "6px",
                 }}
               >
-                <option style={{ color: "gray", fontSize: "14px" }}>
-                  <MDTypography variant="caption">SELECT ACCOUNT</MDTypography>
-                </option>
+                <MDTypography component="option" value="AP" variant="caption">
+                  SELECT ACCOUNT
+                </MDTypography>
+
                 {accounts.map((data) => {
                   return (
-                    <option style={{ color: "gray", fontSize: "14px" }}>
-                      <MDTypography variant="caption">
-                        {data.accountName.toUpperCase()}
-                      </MDTypography>
-                    </option>
+                    <MDTypography variant="caption" component="option" value={data.accountName}>
+                      {data.accountName.toUpperCase()}
+                    </MDTypography>
                   );
                 })}
-              </select>
+              </MDBox>
             </MDBox>
           </MDBox>
         )}
@@ -258,7 +259,8 @@ export default function EditComponent({
                 <MDTypography variant="caption" fontWeight="medium" margin="0px 8px 0px 0px">
                   ACCOUNT
                 </MDTypography>
-                <select
+                <MDBox
+                  component="select"
                   value={account}
                   onChange={(e) => setAccount(e.target.value)}
                   style={{
@@ -266,25 +268,23 @@ export default function EditComponent({
                     outline: "none",
                     border: "1px solid rgb(230, 226, 226)",
                     borderRadius: "5px",
-                    fontSize: "11px",
-                    color: "rgba(0,0,0,0.7)",
+                    fontSize: "12px",
                     minHeight: "40px",
                     paddingLeft: "6px",
                   }}
                 >
-                  <option style={{ color: "gray", fontSize: "14px" }}>
-                    <MDTypography variant="caption">SELECT ACCOUNT</MDTypography>
-                  </option>
+                  <MDTypography component="option" value="SELECT ACCOUNT" variant="caption">
+                    SELECT ACCOUNT
+                  </MDTypography>
+
                   {accountData.map((data) => {
                     return (
-                      <option style={{ color: "gray", fontSize: "14px" }}>
-                        <MDTypography variant="caption">
-                          {data.accountName.toUpperCase()}
-                        </MDTypography>
-                      </option>
+                      <MDTypography component="option" value={data.accountName} variant="caption">
+                        {data.accountName.toUpperCase()}
+                      </MDTypography>
                     );
                   })}
-                </select>
+                </MDBox>
               </MDBox>
               <MDInput
                 label="Ledger Name"
@@ -296,7 +296,8 @@ export default function EditComponent({
               <MDTypography variant="caption" fontWeight="medium" margin="0px 8px 0px 0px">
                 MODULE
               </MDTypography>
-              <select
+              <MDBox
+                component="select"
                 value={accountType}
                 onChange={(e) => setAccountType(e.target.value)}
                 style={{
@@ -304,25 +305,25 @@ export default function EditComponent({
                   outline: "none",
                   border: "1px solid rgb(230, 226, 226)",
                   borderRadius: "5px",
-                  fontSize: "11px",
-                  color: "rgba(0,0,0,0.7)",
+                  fontSize: "12px",
                   minHeight: "40px",
                   paddingLeft: "6px",
                 }}
               >
-                <option style={{ color: "gray", fontSize: "14px" }}>
-                  <MDTypography variant="caption">SELECT TYPE</MDTypography>
-                </option>
-                <option style={{ color: "gray", fontSize: "14px" }}>
-                  <MDTypography variant="caption">GL</MDTypography>
-                </option>
-                <option style={{ color: "gray", fontSize: "14px" }}>
-                  <MDTypography variant="caption">AR</MDTypography>
-                </option>
-                <option style={{ color: "gray", fontSize: "14px" }}>
-                  <MDTypography variant="caption">AP</MDTypography>
-                </option>
-              </select>
+                <MDTypography component="option" value="AP" variant="caption">
+                  SELECT TYPE
+                </MDTypography>
+                <MDTypography component="option" value="AP" variant="caption">
+                  GL
+                </MDTypography>
+                <MDTypography component="option" value="AP" variant="caption">
+                  AR
+                </MDTypography>
+
+                <MDTypography component="option" value="AP" variant="caption">
+                  AP
+                </MDTypography>
+              </MDBox>
             </MDBox>
             <MDBox>
               <MDTypography variant="caption" fontWeight="medium" margin="0px 8px 0px 0px">
@@ -454,7 +455,8 @@ export default function EditComponent({
                             <MDTypography variant="caption" fontWeight="medium">
                               {data.label}
                             </MDTypography>
-                            <select
+                            <MDBox
+                              component="select"
                               value={data.value}
                               onChange={(e) => updateOpeningBalanceForm(data.label, e.target.value)}
                               style={{
@@ -463,24 +465,25 @@ export default function EditComponent({
                                 border: "1px solid rgb(230, 226, 226)",
                                 borderRadius: "5px",
                                 fontSize: "11px",
-                                color: "rgba(0,0,0,0.7)",
                                 minHeight: "40px",
                                 paddingLeft: "6px",
                               }}
                             >
-                              <option style={{ color: "gray", fontSize: "14px" }}>
-                                <MDTypography variant="caption">SELECT</MDTypography>
-                              </option>
+                              <MDTypography component="option" value="SELECT" variant="caption">
+                                SELECT
+                              </MDTypography>
                               {accounts.map((data) => {
                                 return (
-                                  <option style={{ color: "gray", fontSize: "14px" }}>
-                                    <MDTypography variant="caption">
-                                      {data.accountName.toUpperCase()}
-                                    </MDTypography>
-                                  </option>
+                                  <MDTypography
+                                    component="option"
+                                    value={data.accountName}
+                                    variant="caption"
+                                  >
+                                    {data.accountName.toUpperCase()}
+                                  </MDTypography>
                                 );
                               })}
-                            </select>
+                            </MDBox>
                           </MDBox>
                         )}
                         {data.type === "date" && (

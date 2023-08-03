@@ -75,7 +75,7 @@ export default function CreateAccountsAndCategories() {
     );
   };
   const [categories, setCategories] = useState([
-    { categoryName: "None" },
+    { categoryName: "None", categoryDescription: "No Category" },
     {
       categoryName: "Sales",
       categoryDescription: "Non-items based sales",
@@ -107,14 +107,16 @@ export default function CreateAccountsAndCategories() {
 
   useEffect(() => {
     setCategoriesData(
-      categories.map((data) => {
-        return {
-          "Category Name": data.categoryName,
-          "Category Description": data.categoryDescription,
-          Account: data.account,
-          Action: <EditActionComponent currentName={data.categoryName} type="Category" />,
-        };
-      })
+      categories
+        .filter((data) => data.categoryName !== "None")
+        .map((data) => {
+          return {
+            "Category Name": data.categoryName,
+            "Category Description": data.categoryDescription,
+            Account: data.account,
+            Action: <EditActionComponent currentName={data.categoryName} type="Category" />,
+          };
+        })
     );
   }, [categories]);
 

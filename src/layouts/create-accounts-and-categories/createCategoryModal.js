@@ -63,7 +63,8 @@ export default function CreateCategory({ submitted, cancel, accounts }) {
             <MDTypography variant="caption" fontWeight="medium" margin="0px 8px 0px 0px">
               ACCOUNT
             </MDTypography>
-            <select
+            <MDBox
+              component="select"
               value={account}
               onChange={(e) => setAccount(e.target.value)}
               style={{
@@ -71,23 +72,23 @@ export default function CreateCategory({ submitted, cancel, accounts }) {
                 outline: "none",
                 border: "1px solid rgb(230, 226, 226)",
                 borderRadius: "5px",
-                fontSize: "11px",
-                color: "rgba(0,0,0,0.7)",
+                fontSize: "12px",
                 minHeight: "40px",
                 paddingLeft: "6px",
               }}
             >
-              <option style={{ color: "gray", fontSize: "14px" }}>
-                <MDTypography variant="caption">SELECT ACCOUNT</MDTypography>
-              </option>
+              <MDTypography component="option" value="AP" variant="caption">
+                SELECT ACCOUNT
+              </MDTypography>
+
               {accounts.map((data) => {
                 return (
-                  <option style={{ color: "gray", fontSize: "14px" }}>
-                    <MDTypography variant="caption">{data.accountName.toUpperCase()}</MDTypography>
-                  </option>
+                  <MDTypography variant="caption" component="option" value={data.accountName}>
+                    {data.accountName.toUpperCase()}
+                  </MDTypography>
                 );
               })}
-            </select>
+            </MDBox>
           </MDBox>
         </MDBox>
         <MDBox width="100%" marginTop="14px">

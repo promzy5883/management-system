@@ -8,7 +8,7 @@ import MDButton from "components/MDButton";
 import { ArrowDropDown, Close } from "@mui/icons-material";
 
 export default function CreateLedger({ submitted, cancel, category, accounts }) {
-  const [position, setPosition] = useState(-340);
+  const [position, setPosition] = useState(-520);
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [account, setAccount] = useState("");
@@ -67,7 +67,7 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
           maxWidth: "710px",
           width: "90%",
           p: 2,
-          height: "330px",
+          height: "515px",
           transition: "0.4s",
           transform: `translateY(${position}px)`,
           zIndex: 20,
@@ -107,7 +107,8 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
               <MDTypography variant="caption" fontWeight="medium" margin="0px 8px 0px 0px">
                 ACCOUNT
               </MDTypography>
-              <select
+              <MDBox
+                component="select"
                 value={account}
                 onChange={(e) => setAccount(e.target.value)}
                 style={{
@@ -115,25 +116,22 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                   outline: "none",
                   border: "1px solid rgb(230, 226, 226)",
                   borderRadius: "5px",
-                  fontSize: "11px",
-                  color: "rgba(0,0,0,0.7)",
                   minHeight: "40px",
                   paddingLeft: "6px",
+                  fontSize: "12px",
                 }}
               >
-                <option style={{ color: "gray", fontSize: "14px" }}>
-                  <MDTypography variant="caption">SELECT ACCOUNT</MDTypography>
-                </option>
+                <MDTypography component="option" variant="caption" value="SELECT ACCOUNT">
+                  SELECT ACCOUNT
+                </MDTypography>
                 {accounts.map((data) => {
                   return (
-                    <option style={{ color: "gray", fontSize: "14px" }}>
-                      <MDTypography variant="caption">
-                        {data.accountName.toUpperCase()}
-                      </MDTypography>
-                    </option>
+                    <MDTypography component="option" variant="caption" value={data.accountName}>
+                      {data.accountName.toUpperCase()}
+                    </MDTypography>
                   );
                 })}
-              </select>
+              </MDBox>
             </MDBox>
             <MDInput label="Ledger Name" value={name} onChange={(e) => setName(e.target.value)} />
           </div>
@@ -142,7 +140,8 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
             <MDTypography variant="caption" fontWeight="medium" margin="0px 8px 0px 0px">
               MODULE
             </MDTypography>
-            <select
+            <MDBox
+              component="select"
               value={type}
               onChange={(e) => setType(e.target.value)}
               style={{
@@ -150,25 +149,25 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                 outline: "none",
                 border: "1px solid rgb(230, 226, 226)",
                 borderRadius: "5px",
-                fontSize: "11px",
-                color: "rgba(0,0,0,0.7)",
                 minHeight: "40px",
                 paddingLeft: "6px",
+                fontSize: "12px",
               }}
             >
-              <option style={{ color: "gray", fontSize: "14px" }}>
-                <MDTypography variant="caption">SELECT TYPE</MDTypography>
-              </option>
-              <option style={{ color: "gray", fontSize: "14px" }}>
-                <MDTypography variant="caption">GL</MDTypography>
-              </option>
-              <option style={{ color: "gray", fontSize: "14px" }}>
-                <MDTypography variant="caption">AR</MDTypography>
-              </option>
-              <option style={{ color: "gray", fontSize: "14px" }}>
-                <MDTypography variant="caption">AP</MDTypography>
-              </option>
-            </select>
+              <MDTypography component="option" value="AP" variant="caption">
+                SELECT TYPE
+              </MDTypography>
+              <MDTypography component="option" value="AP" variant="caption">
+                GL
+              </MDTypography>
+              <MDTypography component="option" value="AP" variant="caption">
+                AR
+              </MDTypography>
+
+              <MDTypography component="option" value="AP" variant="caption">
+                AP
+              </MDTypography>
+            </MDBox>
           </MDBox>
           <MDBox>
             <MDTypography variant="caption" fontWeight="medium" margin="0px 8px 0px 0px">
@@ -299,7 +298,8 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                           <MDTypography variant="caption" fontWeight="medium">
                             {data.label}
                           </MDTypography>
-                          <select
+                          <MDBox
+                            component="select"
                             value={data.value}
                             onChange={(e) => updateOpeningBalanceForm(data.label, e.target.value)}
                             style={{
@@ -308,24 +308,25 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                               border: "1px solid rgb(230, 226, 226)",
                               borderRadius: "5px",
                               fontSize: "11px",
-                              color: "rgba(0,0,0,0.7)",
                               minHeight: "40px",
                               paddingLeft: "6px",
                             }}
                           >
-                            <option style={{ color: "gray", fontSize: "14px" }}>
-                              <MDTypography variant="caption">SELECT</MDTypography>
-                            </option>
+                            <MDTypography component="option" value="SELECT" variant="caption">
+                              SELECT
+                            </MDTypography>
                             {accounts.map((data) => {
                               return (
-                                <option style={{ color: "gray", fontSize: "14px" }}>
-                                  <MDTypography variant="caption">
-                                    {data.accountName.toUpperCase()}
-                                  </MDTypography>
-                                </option>
+                                <MDTypography
+                                  component="option"
+                                  value={data.accountName}
+                                  variant="caption"
+                                >
+                                  {data.accountName.toUpperCase()}
+                                </MDTypography>
                               );
                             })}
-                          </select>
+                          </MDBox>
                         </MDBox>
                       )}
                       {data.type === "date" && (
