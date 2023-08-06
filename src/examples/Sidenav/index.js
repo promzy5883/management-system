@@ -34,6 +34,7 @@ import {
 } from "context";
 import { childrenRoutes } from "routes";
 import { ArrowRight, Close } from "@mui/icons-material";
+import SubMenuLink from "layouts/otherComponents/subMenu";
 
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const [controller, dispatch] = useMaterialUIController();
@@ -168,10 +169,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
                 {children.map((child) => {
                   return (
                     <NavLink key={child.key} to={child.route}>
-                      <SidenavCollapse
-                        name={child.name}
-                        active={location.pathname === child.route}
-                      />
+                      <SubMenuLink name={child.name} />
                     </NavLink>
                   );
                 })}

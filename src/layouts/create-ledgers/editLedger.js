@@ -7,23 +7,115 @@ import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
 import { ArrowDropDown, Close } from "@mui/icons-material";
 
-export default function CreateLedger({ submitted, cancel, category, accounts }) {
-  const [position, setPosition] = useState(0);
-  const [name, setName] = useState("");
-  const [type, setType] = useState("");
-  const [account, setAccount] = useState("");
-  const [categoryValue, setCategoryValue] = useState("");
-
+export default function EditLedger({
+  accounts,
+  cancel,
+  submitted,
+  ledgerData,
+  type,
+  categoryData,
+  accountData,
+  currentName,
+}) {
   const [openingBalanceForm, setOPeningBalanceForm] = useState([
-    { label: "Date", type: "date", value: "" },
-    { label: "Account", type: "select", value: "" },
-    { label: "Contra", type: "text", value: "" },
-    { label: "Contra Account", type: "text", value: "" },
-    { label: "Project Payee", type: "text", value: "" },
-    { label: "Description", type: "text", value: "" },
-    { label: "Debit", type: "text", value: "" },
-    { label: "Credit", type: "text", value: "" },
+    {
+      label: "Date",
+      type: "date",
+      value:
+        type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].Date
+          ? type === "Ledger" &&
+            ledgerData.filter((data) => data.ledgerName === currentName)[0].Date
+          : "",
+    },
+    {
+      label: "Account",
+      type: "select",
+      value:
+        type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].Account
+          ? ledgerData.filter((data) => data.ledgerName === currentName)[0].Account
+          : "",
+    },
+    {
+      label: "Contra",
+      type: "text",
+      value:
+        type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].Contra
+          ? type === "Ledger" &&
+            ledgerData.filter((data) => data.ledgerName === currentName)[0].Contra
+          : "",
+    },
+    {
+      label: "Contra Account",
+      type: "text",
+      value:
+        type === "Ledger" &&
+        ledgerData.filter((data) => data.ledgerName === currentName)[0]["Contra Account"]
+          ? ledgerData.filter((data) => data.ledgerName === currentName)[0]["Contra Account"]
+          : "",
+    },
+    {
+      label: "Project Payee",
+      type: "text",
+      value:
+        type === "Ledger" &&
+        ledgerData.filter((data) => data.ledgerName === currentName)[0]["Project Payee"]
+          ? ledgerData.filter((data) => data.ledgerName === currentName)[0]["Project Payee"]
+          : "",
+    },
+    {
+      label: "Description",
+      type: "text",
+      value:
+        type === "Ledger" &&
+        ledgerData.filter((data) => data.ledgerName === currentName)[0].Description
+          ? ledgerData.filter((data) => data.ledgerName === currentName)[0].Description
+          : "",
+    },
+    {
+      label: "Debit",
+      type: "text",
+      value:
+        type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].Debit
+          ? type === "Ledger" &&
+            ledgerData.filter((data) => data.ledgerName === currentName)[0].Debit
+          : "",
+    },
+    {
+      label: "Credit",
+      type: "text",
+      value:
+        type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].Credit
+          ? type === "Ledger" &&
+            ledgerData.filter((data) => data.ledgerName === currentName)[0].Credit
+          : "",
+    },
   ]);
+  const [ledgerName, setLedgerName] = useState(
+    type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].ledgerName
+      ? type === "Ledger" &&
+          ledgerData.filter((data) => data.ledgerName === currentName)[0].ledgerName
+      : ""
+  );
+  const [accountType, setAccountType] = useState(
+    type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].accountType
+      ? type === "Ledger" &&
+          ledgerData.filter((data) => data.ledgerName === currentName)[0].accountType
+      : ""
+  );
+  const [account, setAccount] = useState(
+    type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].account
+      ? type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].account
+      : ""
+  );
+  const [categoryValue, setCategoryValue] = useState(
+    type === "Ledger" &&
+      ledgerData.filter((data) => data.ledgerName === currentName)[0].categoryValue
+      ? ledgerData.filter((data) => data.ledgerName === currentName)[0].categoryValue
+      : ""
+  );
+  const [position, setPosition] = useState(0);
+
+  useEffect(() => setPosition(1), []);
 
   const updateOpeningBalanceForm = (label, newValue) => {
     setOPeningBalanceForm(
@@ -38,7 +130,7 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
   };
 
   const toggleCategoryMenu = () => {
-    let elem = document.getElementById("categoryMenu");
+    let elem = document.getElementById("categoryMenuEdit");
     if (elem.style.display !== "flex") {
       elem.style.display = "flex";
     } else {
@@ -46,20 +138,6 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
     }
   };
 
-  const handleSubmit = () => {
-    let details = {
-      ledgerName: name,
-      account: account,
-      module: type,
-      categoryategory: categoryValue,
-    };
-    openingBalanceForm.forEach((form) => {
-      details[form.label] = form.value;
-    });
-    submitted(details);
-  };
-
-  useEffect(() => setPosition(1), []);
   return (
     <div className="createLedgerModal" style={{ alignItems: "center" }}>
       <div className="createLedgerLayer">
@@ -84,7 +162,7 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
             alignItems="center"
             marginBottom="8px"
           >
-            ADD LEDGER
+            EDIT LEDGER
             <button
               onClick={() => cancel()}
               style={{ border: "none", backgroundColor: "transparent", cursor: "pointer" }}
@@ -138,8 +216,8 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
               <MDInput
                 label="Ledger Name"
                 size="small"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={ledgerName}
+                onChange={(e) => setLedgerName(e.target.value)}
               />
             </div>
             <div
@@ -158,8 +236,8 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                 </MDTypography>
                 <MDBox
                   component="select"
-                  value={type}
-                  onChange={(e) => setType(e.target.value)}
+                  value={accountType}
+                  onChange={(e) => setAccountType(e.target.value)}
                   style={{
                     width: "100%",
                     outline: "none",
@@ -212,7 +290,7 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                     </MDTypography>
                   </div>
                   <div
-                    id="categoryMenu"
+                    id="categoryMenuEdit"
                     style={{
                       width: "100%",
                       position: "absolute",
@@ -228,7 +306,7 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                       zIndex: "10",
                     }}
                   >
-                    {category.map((data) => {
+                    {categoryData.map((data) => {
                       return data.categoryName !== categoryValue ? (
                         <div
                           onClick={() => {
@@ -240,8 +318,7 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                         >
                           <MDTypography
                             color={data.categoryName === categoryValue ? "white" : "inherit"}
-                            variant="caption"
-                            fontWeight="medium"
+                            variant="button"
                           >
                             {data.categoryName}
                           </MDTypography>
@@ -263,7 +340,8 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                         >
                           <MDTypography
                             color={data.categoryName === categoryValue ? "white" : "inherit"}
-                            variant="button"
+                            variant="caption"
+                            fontWeight="medium"
                           >
                             {data.categoryName}
                           </MDTypography>
@@ -372,8 +450,13 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
             </div>
           </MDBox>
           <MDBox width="100%" marginTop="14px">
-            <MDButton color="success" onClick={handleSubmit}>
-              Create
+            <MDButton
+              color="success"
+              onClick={() => {
+                submitted({});
+              }}
+            >
+              Edit
             </MDButton>
           </MDBox>
         </Card>

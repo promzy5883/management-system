@@ -79,18 +79,47 @@ export default function CreateAccountsAndCategories() {
     {
       categoryName: "Sales",
       categoryDescription: "Non-items based sales",
+      account: "Assests",
     },
     {
       categoryName: "Cost of Sales",
       categoryDescription: "Any cost associated with sales. Used to calculate gross profit.",
+      account: "Liability",
     },
     {
       categoryName: "Other Income",
       categoryDescription: "Income received such as interest and discount received.",
+      account: "Assets",
     },
     {
       categoryName: "Expenses",
       categoryDescription: "Cost incurred, Advertising, rent, stationary, and so on.",
+      account: "Liability",
+    },
+    {
+      categoryName: "Income Tax",
+      categoryDescription: "Taxes levied on the net income of the company",
+      account: "Assets",
+    },
+    {
+      categoryName: "Non-Current Assets",
+      categoryDescription: "Items of value lasting for an extended period of time such as property",
+      account: "Liability",
+    },
+    {
+      categoryName: "Current Assets",
+      categoryDescription: "Assets expected to be sold or used in under a year such as cash",
+      account: "Assets",
+    },
+    {
+      categoryName: "Non-Current Liabilities",
+      categoryDescription: "Liabilities to be settled in the future. Loan, mortgages, and so on.",
+      account: "Assets",
+    },
+    {
+      categoryName: "Current Liabilities",
+      categoryDescription: "Liabilities",
+      account: "Liability",
     },
   ]);
   const [accounts, setAccounts] = useState([

@@ -21,7 +21,7 @@ export default function CreateCategory({ submitted, cancel, accounts }) {
           maxWidth: "450px",
           width: "90%",
           p: 2,
-          height: "300px",
+          height: "290px",
           transition: "0.4s",
           transform: `translateY(${position}px)`,
           zIndex: 20,
@@ -51,12 +51,14 @@ export default function CreateCategory({ submitted, cancel, accounts }) {
             label="Category Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            size="small"
             fullWidth
           />
           <MDInput
             label="Category Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            size="small"
             fullWidth
           />
           <MDBox>
@@ -73,18 +75,18 @@ export default function CreateCategory({ submitted, cancel, accounts }) {
                 border: "1px solid rgb(230, 226, 226)",
                 borderRadius: "5px",
                 fontSize: "12px",
-                minHeight: "40px",
+                minHeight: "35px",
                 paddingLeft: "6px",
               }}
             >
               <MDTypography component="option" value="AP" variant="caption">
-                SELECT ACCOUNT
+                Select Account
               </MDTypography>
 
               {accounts.map((data) => {
                 return (
                   <MDTypography variant="caption" component="option" value={data.accountName}>
-                    {data.accountName.toUpperCase()}
+                    {data.accountName}
                   </MDTypography>
                 );
               })}

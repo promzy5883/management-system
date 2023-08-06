@@ -7,24 +7,57 @@ import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
 import { ArrowDropDown, Close } from "@mui/icons-material";
 
-export default function AddCard({ submitted, cancel }) {
+export default function EditCard({ number, data, submitted, cancel }) {
   const [position, setPosition] = useState(0);
+  const filteredData = data.filter((data) => data.cardNumber === number)[0];
 
-  const [cardName, setCardName] = useState("");
-  const [bankName, setBankName] = useState("");
-  const [type, setType] = useState("");
-  const [categoryValue, setCategoryValue] = useState("");
-  const [cardNumber, setCardNumber] = useState("");
-  const [cardType, setCardType] = useState("");
+  const [cardName, setCardName] = useState(filteredData.cardName || "");
+  const [bankName, setBankName] = useState(filteredData.bankName || "");
+  const [type, setType] = useState(filteredData.module || "");
+  const [categoryValue, setCategoryValue] = useState(filteredData.category || "");
+  const [cardNumber, setCardNumber] = useState(filteredData.cardNumber || "");
+  const [cardType, setCardType] = useState(filteredData.cardType || "");
   const [openingBalanceForm, setOPeningBalanceForm] = useState([
-    { label: "Date", type: "date", value: "" },
-    { label: "Account", type: "select", value: "" },
-    { label: "Contra", type: "text", value: "" },
-    { label: "Contra Account", type: "text", value: "" },
-    { label: "Project Payee", type: "text", value: "" },
-    { label: "Description", type: "text", value: "" },
-    { label: "Debit", type: "text", value: "" },
-    { label: "Credit", type: "text", value: "" },
+    {
+      label: "Date",
+      type: "date",
+      value: filteredData.Date ? filteredData.date : "",
+    },
+    {
+      label: "Account",
+      type: "select",
+      value: filteredData.Account ? filteredData.Account : "",
+    },
+    {
+      label: "Contra",
+      type: "text",
+      value: filteredData.Contra ? filteredData.Contra : "",
+    },
+    {
+      label: "Contra Account",
+      type: "text",
+      value: filteredData["Contra Account"] ? filteredData["Contra Account"] : "",
+    },
+    {
+      label: "Project Payee",
+      type: "text",
+      value: filteredData["Project Payee"] ? filteredData["Project Payee"] : "",
+    },
+    {
+      label: "Description",
+      type: "text",
+      value: filteredData.Description ? filteredData.Description : "",
+    },
+    {
+      label: "Debit",
+      type: "text",
+      value: filteredData.Debit ? filteredData.Debit : "",
+    },
+    {
+      label: "Credit",
+      type: "text",
+      value: filteredData.Credit ? filteredData.Credit : "",
+    },
   ]);
 
   const [categories, setCategories] = useState([
@@ -144,7 +177,7 @@ export default function AddCard({ submitted, cancel }) {
             alignItems="center"
             marginBottom="8px"
           >
-            ADD CARD
+            EDIT CARD
             <button
               onClick={() => cancel()}
               style={{ border: "none", backgroundColor: "transparent", cursor: "pointer" }}
@@ -467,7 +500,7 @@ export default function AddCard({ submitted, cancel }) {
 
           <MDBox width="100%" marginTop="14px">
             <MDButton color="success" onClick={handleSubmit}>
-              Add CARD
+              EDIT CARD
             </MDButton>
           </MDBox>
         </Card>

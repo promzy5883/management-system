@@ -28,6 +28,8 @@ import CreateAccountsAndCategories from "layouts/create-accounts-and-categories"
 import ManageBanks from "layouts/manage-banks";
 import ManageCards from "layouts/manage-cards";
 import CreateLedgers from "layouts/create-ledgers";
+import CashFlow from "layouts/cash-flow";
+import Transactions from "layouts/transactions";
 
 const routes = [
   {
@@ -230,7 +232,7 @@ export const childrenRoutes = [
     name: "Cash Flow",
     key: "cash-flow",
     route: "/banking-cash-flow",
-    component: <Dashboard />,
+    component: <CashFlow />,
   },
   {
     isLink: true,
@@ -246,7 +248,7 @@ export const childrenRoutes = [
     name: "Transactions",
     key: "transactions",
     route: "/accounts-transactions",
-    component: <Dashboard />,
+    component: <Transactions />,
   },
   {
     isLink: true,

@@ -21,7 +21,16 @@ export default function ManageBanks() {
     {
       bankAccountName: "CHIMSON BROTHERS",
       bankName: "First Bank",
+      branchName: "Dev Branch",
       accountNumber: 3049122766,
+      category: "Current Assets",
+    },
+    {
+      bankAccountName: "Saviour Wisdom Essien",
+      bankName: "Union Bank",
+      accountNumber: "0176487097",
+      category: "Expense",
+      branchName: "Aba Branch",
     },
   ]);
   const [banksData, setBanksData] = useState([]);

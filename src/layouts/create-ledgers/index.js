@@ -11,7 +11,7 @@ import CreateLedger from "layouts/create-accounts-and-categories/createLedgerMod
 import DataTable from "examples/Tables/DataTable";
 import MDTypography from "components/MDTypography";
 import { Edit, MoreHoriz } from "@mui/icons-material";
-import EditComponent from "layouts/create-accounts-and-categories/edit";
+import EditLedger from "./editLedger";
 
 export default function CreateLedgers() {
   const [modalActive, setModalActive] = useState(false);
@@ -76,18 +76,47 @@ export default function CreateLedgers() {
     {
       categoryName: "Sales",
       categoryDescription: "Non-items based sales",
+      account: "Assests",
     },
     {
       categoryName: "Cost of Sales",
       categoryDescription: "Any cost associated with sales. Used to calculate gross profit.",
+      account: "Liability",
     },
     {
       categoryName: "Other Income",
       categoryDescription: "Income received such as interest and discount received.",
+      account: "Assets",
     },
     {
-      categoryName: "Expenses",
+      categoryName: "Expense",
       categoryDescription: "Cost incurred, Advertising, rent, stationary, and so on.",
+      account: "Liability",
+    },
+    {
+      categoryName: "Income Tax",
+      categoryDescription: "Taxes levied on the net income of the company",
+      account: "Assets",
+    },
+    {
+      categoryName: "Non-Current Assets",
+      categoryDescription: "Items of value lasting for an extended period of time such as property",
+      account: "Liability",
+    },
+    {
+      categoryName: "Current Assets",
+      categoryDescription: "Assets expected to be sold or used in under a year such as cash",
+      account: "Assets",
+    },
+    {
+      categoryName: "Non-Current Liabilities",
+      categoryDescription: "Liabilities to be settled in the future. Loan, mortgages, and so on.",
+      account: "Assets",
+    },
+    {
+      categoryName: "Current Liabilities",
+      categoryDescription: "Liabilities",
+      account: "Liability",
     },
   ]);
   const [accounts, setAccounts] = useState([
@@ -98,9 +127,14 @@ export default function CreateLedgers() {
     { accountName: "Equity" },
   ]);
   const [ledgers, setLedgers] = useState([
-    { ledgerName: "Repair & Maintenance", accountType: "GL" },
-    { ledgerName: "Wages & Salary", accountType: "GL" },
-    { ledgerName: "Government Levy", accountType: "GL" },
+    {
+      ledgerName: "Repair & Maintenance",
+      accountType: "GL",
+      account: "Expense",
+      category: "Expense",
+    },
+    { ledgerName: "Wages & Salary", accountType: "GL", account: "Liability", category: "Expense" },
+    { ledgerName: "Government Levy", accountType: "GL", account: "Liability", category: "Expense" },
   ]);
   const [ledgerTableData, setLedgerTableData] = useState([]);
 
@@ -133,7 +167,7 @@ export default function CreateLedgers() {
       )}
 
       {editModal && (
-        <EditComponent
+        <EditLedger
           type="Ledger"
           accounts={accounts}
           categoryData={categories}

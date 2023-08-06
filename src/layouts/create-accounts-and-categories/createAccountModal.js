@@ -19,7 +19,7 @@ export default function CreateAccount({ submitted, cancel }) {
           maxWidth: "450px",
           width: "90%",
           p: 2,
-          height: "180px",
+          height: "170px",
           transition: "0.4s",
           transform: `translateY(${position}px)`,
           zIndex: 20,
@@ -49,6 +49,7 @@ export default function CreateAccount({ submitted, cancel }) {
             label="Account Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            size="small"
             fullWidth
           />
         </MDBox>

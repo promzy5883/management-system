@@ -11,12 +11,23 @@ import DataTable from "examples/Tables/DataTable";
 import MDTypography from "components/MDTypography";
 import { Add, Edit, MoreHoriz } from "@mui/icons-material";
 import AddCard from "./addCard";
+import EditCard from "./editCard";
 
 export default function ManageCards() {
   const [modalActive, setModalActive] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [addBankModal, setAddBankModal] = useState(false);
-  const [cards, setCards] = useState([]);
+  const [currentNo, setCurrentNo] = useState(0);
+  const [cards, setCards] = useState([
+    {
+      cardName: "Onuoha Promise",
+      bankName: "Union Bank",
+      category: "Expense",
+      cardNumber: "0164 8906 1876",
+      cardType: "Verve Card",
+      module: "GL",
+    },
+  ]);
   const [cardTableData, setCardTableData] = useState([]);
 
   const EditActionComponent = ({ currentName }) => {
@@ -59,6 +70,7 @@ export default function ManageCards() {
               className="editMenu"
               onClick={() => {
                 toggleMenu(id);
+                setCurrentNo(currentName);
               }}
             >
               <MDTypography variant="overline" display="flex" alignItems="center" gap="3px">
@@ -72,12 +84,22 @@ export default function ManageCards() {
   };
 
   useEffect(() => {
+    if (currentNo) {
+      setEditModal(true);
+    } else {
+      setEditModal(false);
+    }
+  }, [currentNo]);
+
+  useEffect(() => {
     setCardTableData(
       cards.map((data) => {
         return {
           "Card Name": data.cardName,
           "Card Number": data.cardNumber,
-          Action: <EditActionComponent currentName={data.accountNumber} />,
+          "Bank Name": data.bankName,
+          Category: data.category,
+          Action: <EditActionComponent currentName={data.cardNumber} />,
         };
       })
     );
@@ -89,6 +111,20 @@ export default function ManageCards() {
         <AddCard
           submitted={(data) => setAddBankModal(false)}
           cancel={() => setAddBankModal(false)}
+        />
+      )}
+      {editModal && (
+        <EditCard
+          data={cards}
+          number={currentNo}
+          submitted={(data) => {
+            setCurrentNo(null);
+            setEditModal(false);
+          }}
+          cancel={() => {
+            setCurrentNo(false);
+            setEditModal(false);
+          }}
         />
       )}
       <DashboardLayout>
@@ -148,11 +184,21 @@ export default function ManageCards() {
                 canSearch={true}
                 table={{
                   columns: [
-                    { Header: "Card Name", accessor: "Card Name", width: "40%" },
+                    { Header: "Card Name", accessor: "Card Name", width: "20%" },
                     {
                       Header: "Card Number",
                       accessor: "Card Number",
-                      width: "40%",
+                      width: "20%",
+                    },
+                    {
+                      Header: "Bank Name",
+                      accessor: "Bank Name",
+                      width: "20%",
+                    },
+                    {
+                      Header: "Category",
+                      accessor: "Category",
+                      width: "20%",
                     },
 
                     { Header: "Action", accessor: "Action" },

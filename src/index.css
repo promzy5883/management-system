@@ -10,7 +10,7 @@ body{
 .editMenu:hover{
     background-color: rgba(0,0,0,0.1);
 }
-.addSettingModal{
+.addSettingModal, .createLedgerModal{
     position: fixed;
     top: 0;
     left: 0;
@@ -20,6 +20,15 @@ body{
     height: 100vh;
     display: flex;
     justify-content: center;
+
+}
+.createLedgerModal{
+  justify-content: flex-end;
+}
+.createLedgerLayer{
+    width: 100%;
+    max-width: calc(100% - 320px);
+    
 }
 .menuSelect,.menuSelectActive{
     width: 100%;
