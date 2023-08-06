@@ -4,7 +4,7 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 import Card from "@mui/material/Card";
-import backgroundImage from "assets/images/home-decor-4.jpeg";
+import backgroundImage from "assets/images/bg-sign-in-basic.jpeg";
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
 import ItemListsTable from "./itemListTable";

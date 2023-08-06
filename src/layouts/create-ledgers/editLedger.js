@@ -36,23 +36,15 @@ export default function EditLedger({
           : "",
     },
     {
-      label: "Contra",
-      type: "text",
+      label: "Ledger",
+      type: "select",
       value:
-        type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].Contra
+        type === "Ledger" && ledgerData.filter((data) => data.ledgerName === currentName)[0].Ledger
           ? type === "Ledger" &&
-            ledgerData.filter((data) => data.ledgerName === currentName)[0].Contra
+            ledgerData.filter((data) => data.ledgerName === currentName)[0].Ledger
           : "",
     },
-    {
-      label: "Contra Account",
-      type: "text",
-      value:
-        type === "Ledger" &&
-        ledgerData.filter((data) => data.ledgerName === currentName)[0]["Contra Account"]
-          ? ledgerData.filter((data) => data.ledgerName === currentName)[0]["Contra Account"]
-          : "",
-    },
+
     {
       label: "Project Payee",
       type: "text",
@@ -414,17 +406,30 @@ export default function EditLedger({
                               <MDTypography component="option" value="SELECT" variant="caption">
                                 Select
                               </MDTypography>
-                              {accounts.map((data) => {
-                                return (
-                                  <MDTypography
-                                    component="option"
-                                    value={data.accountName}
-                                    variant="caption"
-                                  >
-                                    {data.accountName}
-                                  </MDTypography>
-                                );
-                              })}
+                              {data.label === "Account" &&
+                                accounts.map((data) => {
+                                  return (
+                                    <MDTypography
+                                      component="option"
+                                      value={data.accountName}
+                                      variant="caption"
+                                    >
+                                      {data.accountName}
+                                    </MDTypography>
+                                  );
+                                })}
+                              {data.label === "Ledger" &&
+                                ledgerData.map((data) => {
+                                  return (
+                                    <MDTypography
+                                      component="option"
+                                      value={data.ledgerName}
+                                      variant="caption"
+                                    >
+                                      {data.ledgerName}
+                                    </MDTypography>
+                                  );
+                                })}
                             </MDBox>
                           </MDBox>
                         )}

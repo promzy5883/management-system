@@ -13,12 +13,20 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
   const [type, setType] = useState("");
   const [account, setAccount] = useState("");
   const [categoryValue, setCategoryValue] = useState("");
-
+  const [ledgers, setLedgers] = useState([
+    {
+      ledgerName: "Repair & Maintenance",
+      accountType: "GL",
+      account: "Expense",
+      category: "Expense",
+    },
+    { ledgerName: "Wages & Salary", accountType: "GL", account: "Liability", category: "Expense" },
+    { ledgerName: "Government Levy", accountType: "GL", account: "Liability", category: "Expense" },
+  ]);
   const [openingBalanceForm, setOPeningBalanceForm] = useState([
     { label: "Date", type: "date", value: "" },
     { label: "Account", type: "select", value: "" },
-    { label: "Contra", type: "text", value: "" },
-    { label: "Contra Account", type: "text", value: "" },
+    { label: "Ledger", type: "select", value: "" },
     { label: "Project Payee", type: "text", value: "" },
     { label: "Description", type: "text", value: "" },
     { label: "Debit", type: "text", value: "" },
@@ -336,17 +344,30 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                               <MDTypography component="option" value="SELECT" variant="caption">
                                 Select
                               </MDTypography>
-                              {accounts.map((data) => {
-                                return (
-                                  <MDTypography
-                                    component="option"
-                                    value={data.accountName}
-                                    variant="caption"
-                                  >
-                                    {data.accountName}
-                                  </MDTypography>
-                                );
-                              })}
+                              {data.label === "Account" &&
+                                accounts.map((data) => {
+                                  return (
+                                    <MDTypography
+                                      component="option"
+                                      value={data.accountName}
+                                      variant="caption"
+                                    >
+                                      {data.accountName}
+                                    </MDTypography>
+                                  );
+                                })}
+                              {data.label === "Ledger" &&
+                                ledgers.map((data) => {
+                                  return (
+                                    <MDTypography
+                                      component="option"
+                                      value={data.ledgerName}
+                                      variant="caption"
+                                    >
+                                      {data.ledgerName}
+                                    </MDTypography>
+                                  );
+                                })}
                             </MDBox>
                           </MDBox>
                         )}

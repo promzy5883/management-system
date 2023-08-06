@@ -43,6 +43,23 @@ export default function CashFlow() {
       background: "rgba(204,197,197,0.3)",
     },
   ];
+  const [bank, setBank] = useState("");
+  const [banks, setBanks] = useState([
+    {
+      bankAccountName: "CHIMSON BROTHERS",
+      bankName: "First Bank",
+      branchName: "Dev Branch",
+      accountNumber: 3049122766,
+      category: "Current Assets",
+    },
+    {
+      bankAccountName: "Saviour Wisdom Essien",
+      bankName: "Union Bank",
+      accountNumber: "0176487097",
+      category: "Expense",
+      branchName: "Aba Branch",
+    },
+  ]);
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -99,8 +116,36 @@ export default function CashFlow() {
                 flexWrap: "wrap",
                 rowGap: "8px",
                 columnGap: "20px",
+                justifyContent: "center",
               }}
             >
+              <MDBox>
+                <MDBox
+                  component="select"
+                  value={bank}
+                  onChange={(e) => setBank(e.target.value)}
+                  style={{
+                    width: "100%",
+                    outline: "none",
+                    border: "1px solid rgb(230, 226, 226)",
+                    borderRadius: "5px",
+                    minHeight: "35px",
+                    paddingLeft: "6px",
+                    fontSize: "12px",
+                  }}
+                >
+                  <MDTypography component="option" variant="caption" value="SELECT ACCOUNT">
+                    Select Bank
+                  </MDTypography>
+                  {banks.map((data) => {
+                    return (
+                      <MDTypography component="option" variant="caption" value={data.accountName}>
+                        {data.bankAccountName}
+                      </MDTypography>
+                    );
+                  })}
+                </MDBox>
+              </MDBox>
               <div style={{ display: "flex", width: "auto", gap: "10px", alignItems: "center" }}>
                 <MDTypography variant="caption" fontWeight="bold">
                   From:
@@ -138,7 +183,6 @@ export default function CashFlow() {
                   style={{
                     width: "100%",
                     display: "flex",
-                    gap: "200px",
                     flexWrap: "wrap",
                     alignItems: "center",
                     padding: "5px 10px",
@@ -147,7 +191,7 @@ export default function CashFlow() {
                 >
                   {data.underline ? (
                     <>
-                      <MDTypography variant="overline" width="100%" maxWidth="500px">
+                      <MDTypography variant="overline" width="100%" maxWidth="600px">
                         <u>{data.label}</u>
                       </MDTypography>
                       <MDTypography
@@ -160,7 +204,7 @@ export default function CashFlow() {
                     </>
                   ) : (
                     <>
-                      <MDTypography variant="overline" width="100%" maxWidth="500px">
+                      <MDTypography variant="overline" width="100%" maxWidth="600px">
                         {data.label}
                       </MDTypography>
                       <MDTypography
@@ -184,7 +228,6 @@ export default function CashFlow() {
               style={{
                 width: "100%",
                 display: "flex",
-                gap: "200px",
                 flexWrap: "wrap",
                 alignItems: "center",
                 padding: "5px 10px",
@@ -192,7 +235,7 @@ export default function CashFlow() {
               }}
             >
               <>
-                <MDTypography variant="overline" width="100%" maxWidth="500px">
+                <MDTypography variant="overline" width="100%" maxWidth="600px">
                   Purchase of Equipments
                 </MDTypography>
                 <MDTypography variant="overline" fontWeight="medium" color="error">
@@ -209,7 +252,6 @@ export default function CashFlow() {
               style={{
                 width: "100%",
                 display: "flex",
-                gap: "200px",
                 flexWrap: "wrap",
                 alignItems: "center",
                 padding: "5px 10px",
@@ -217,7 +259,7 @@ export default function CashFlow() {
               }}
             >
               <>
-                <MDTypography variant="overline" width="100%" maxWidth="500px">
+                <MDTypography variant="overline" width="100%" maxWidth="600px">
                   Notes Payable
                 </MDTypography>
                 <MDTypography variant="overline" fontWeight="medium">
@@ -229,14 +271,13 @@ export default function CashFlow() {
               style={{
                 width: "100%",
                 display: "flex",
-                gap: "200px",
                 flexWrap: "wrap",
                 alignItems: "center",
                 padding: "5px 10px",
               }}
             >
               <>
-                <MDTypography variant="overline" fontWeight="medium" width="100%" maxWidth="500px">
+                <MDTypography variant="overline" fontWeight="medium" width="100%" maxWidth="600px">
                   <u>Cash Flow for months ended December 31, 2018</u>
                 </MDTypography>
                 <MDTypography variant="overline" fontWeight="medium">
