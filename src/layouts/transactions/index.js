@@ -127,7 +127,7 @@ export default function Transactions() {
                       return (
                         <>
                           {data.type !== "date" && data.type !== "select" && (
-                            <MDBox width="110px">
+                            <MDBox width="100px">
                               <MDTypography variant="caption" fontWeight="medium">
                                 {data.label}
                               </MDTypography>
@@ -144,7 +144,7 @@ export default function Transactions() {
                             </MDBox>
                           )}
                           {data.type === "select" && (
-                            <MDBox width="110px">
+                            <MDBox width="100px">
                               <MDTypography variant="caption" fontWeight="medium">
                                 {data.label}
                               </MDTypography>
@@ -195,7 +195,7 @@ export default function Transactions() {
                             </MDBox>
                           )}
                           {data.type === "date" && (
-                            <MDBox width="110px">
+                            <MDBox width="100px">
                               <MDTypography variant="caption" fontWeight="medium">
                                 {data.label}
                               </MDTypography>

@@ -30,6 +30,7 @@ import ManageCards from "layouts/manage-cards";
 import CreateLedgers from "layouts/create-ledgers";
 import CashFlow from "layouts/cash-flow";
 import Transactions from "layouts/transactions";
+import BankStatements from "layouts/bank-statements";
 
 const routes = [
   {
@@ -240,7 +241,7 @@ export const childrenRoutes = [
     name: "Bank Statements",
     key: "bank-statements",
     route: "/banking-bank-statements",
-    component: <Dashboard />,
+    component: <BankStatements />,
   },
   {
     isLink: true,
