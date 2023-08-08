@@ -55,7 +55,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const checkIsActive = (children) => {
     let value = false;
     children.forEach((child) => {
-      if (child.route === location.pathname) {
+      if (location.pathname.startsWith(child.route)) {
         value = true;
       }
     });

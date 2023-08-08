@@ -390,6 +390,7 @@ export default function EditLedger({
                               {data.label}
                             </MDTypography>
                             <MDBox
+                              color="text"
                               component="select"
                               value={data.value}
                               onChange={(e) => updateOpeningBalanceForm(data.label, e.target.value)}
@@ -398,14 +399,19 @@ export default function EditLedger({
                                 outline: "none",
                                 border: "1px solid rgb(230, 226, 226)",
                                 borderRadius: "5px",
-                                fontSize: "12px",
+                                fontSize: "13px",
                                 minHeight: "35px",
                                 paddingLeft: "6px",
                               }}
                             >
-                              <MDTypography component="option" value="SELECT" variant="caption">
+                              <MDBox
+                                color="text"
+                                component="option"
+                                value="SELECT"
+                                variant="caption"
+                              >
                                 Select
-                              </MDTypography>
+                              </MDBox>
                               {data.label === "Account" &&
                                 accounts.map((data) => {
                                   return (

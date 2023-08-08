@@ -55,6 +55,7 @@ import brandDark from "assets/images/logo-ct-dark.png";
 import Basic from "layouts/authentication/sign-in";
 import { childrenRoutes } from "routes";
 import { Settings } from "@mui/icons-material";
+import ViewLedger from "layouts/otherComponents/viewLedger";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -169,6 +170,7 @@ export default function App() {
         <Routes>
           {getRoutes(routes)}
           {getRoutes(childrenRoutes)}
+          <Route exact path="/accounts-enquiries/:ledgerName" Component={<ViewLedger />} />
         </Routes>
       </ThemeProvider>
     </CacheProvider>
@@ -195,6 +197,7 @@ export default function App() {
           <Routes>
             {getRoutes(routes)}
             {getRoutes(childrenRoutes)}
+            <Route exact path="/accounts-enquiries/:ledgerName" element={<ViewLedger />} />
           </Routes>
         </>
       ) : (

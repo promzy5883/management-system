@@ -31,6 +31,7 @@ import CreateLedgers from "layouts/create-ledgers";
 import CashFlow from "layouts/cash-flow";
 import Transactions from "layouts/transactions";
 import BankStatements from "layouts/bank-statements";
+import Enquiries from "layouts/enquiries";
 
 const routes = [
   {
@@ -273,7 +274,7 @@ export const childrenRoutes = [
     name: "Enquiries",
     key: "enquiries",
     route: "/accounts-enquiries",
-    component: <Dashboard />,
+    component: <Enquiries />,
   },
   {
     isLink: true,

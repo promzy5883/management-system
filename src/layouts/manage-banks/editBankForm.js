@@ -217,9 +217,9 @@ export default function EditBank({ data, submitted, cancel }) {
                       cursor: "pointer",
                     }}
                   >
-                    <MDTypography variant="caption">
+                    <MDBox color="text" fontSize="13px">
                       {categoryValue ? categoryValue : "Select"}
-                    </MDTypography>
+                    </MDBox>
                     <MDTypography>
                       <ArrowDropDown />
                     </MDTypography>
@@ -330,6 +330,7 @@ export default function EditBank({ data, submitted, cancel }) {
                 MODULE
               </MDTypography>
               <MDBox
+                color="text"
                 component="select"
                 value={type}
                 onChange={(e) => setType(e.target.value)}
@@ -340,22 +341,22 @@ export default function EditBank({ data, submitted, cancel }) {
                   borderRadius: "5px",
                   minHeight: "35px",
                   paddingLeft: "6px",
-                  fontSize: "12px",
+                  fontSize: "13px",
                 }}
               >
-                <MDTypography component="option" value="Select Type" variant="caption">
+                <MDBox component="option" value="Select Type" color="text">
                   Select Type
-                </MDTypography>
-                <MDTypography component="option" value="GL" variant="caption">
+                </MDBox>
+                <MDBox component="option" value="GL" color="text">
                   GL
-                </MDTypography>
-                <MDTypography component="option" value="AR" variant="caption">
+                </MDBox>
+                <MDBox component="option" value="AR" color="text">
                   AR
-                </MDTypography>
+                </MDBox>
 
-                <MDTypography component="option" value="AP" variant="caption">
+                <MDBox component="option" value="AP" color="text">
                   AP
-                </MDTypography>
+                </MDBox>
               </MDBox>
             </MDBox>
           </MDBox>
@@ -393,10 +394,11 @@ export default function EditBank({ data, submitted, cancel }) {
                       )}
                       {data.type === "select" && (
                         <MDBox width="110px">
-                          <MDTypography variant="caption" fontWeight="medium">
+                          <MDBox color="text" fontSize="13px">
                             {data.label}
-                          </MDTypography>
+                          </MDBox>
                           <MDBox
+                            color="text"
                             component="select"
                             value={data.value}
                             onChange={(e) => updateOpeningBalanceForm(data.label, e.target.value)}
@@ -410,31 +412,23 @@ export default function EditBank({ data, submitted, cancel }) {
                               paddingLeft: "6px",
                             }}
                           >
-                            <MDTypography component="option" value="SELECT" variant="caption">
+                            <MDBox color="text" component="option" value="SELECT">
                               Select
-                            </MDTypography>
+                            </MDBox>
                             {data.label === "Account" &&
                               accounts.map((data) => {
                                 return (
-                                  <MDTypography
-                                    component="option"
-                                    value={data.accountName}
-                                    variant="caption"
-                                  >
+                                  <MDBox component="option" value={data.accountName} color="text">
                                     {data.accountName}
-                                  </MDTypography>
+                                  </MDBox>
                                 );
                               })}
                             {data.label === "Ledger" &&
                               ledgers.map((data) => {
                                 return (
-                                  <MDTypography
-                                    component="option"
-                                    value={data.ledgerName}
-                                    variant="caption"
-                                  >
+                                  <MDBox component="option" value={data.ledgerName} color="text">
                                     {data.ledgerName}
-                                  </MDTypography>
+                                  </MDBox>
                                 );
                               })}
                           </MDBox>
@@ -442,9 +436,9 @@ export default function EditBank({ data, submitted, cancel }) {
                       )}
                       {data.type === "date" && (
                         <MDBox width="110px">
-                          <MDTypography variant="caption" fontWeight="medium">
+                          <MDBox color="text" fontSize="13px">
                             {data.label}
-                          </MDTypography>
+                          </MDBox>
                           <MDInput
                             type={data.type}
                             value={data.value}

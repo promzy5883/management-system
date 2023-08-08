@@ -76,7 +76,7 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
             maxWidth: "1200px",
             width: "95%",
             p: 2,
-            height: "420px",
+            height: "410px",
             transition: "0.4s",
             opacity: position,
             zIndex: 20,
@@ -118,6 +118,7 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                   ACCOUNT
                 </MDTypography>
                 <MDBox
+                  color="text"
                   component="select"
                   value={account}
                   onChange={(e) => setAccount(e.target.value)}
@@ -128,17 +129,17 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                     borderRadius: "5px",
                     minHeight: "35px",
                     paddingLeft: "6px",
-                    fontSize: "12px",
+                    fontSize: "13px",
                   }}
                 >
-                  <MDTypography component="option" variant="caption" value="SELECT ACCOUNT">
+                  <MDBox component="option" color="text" value="SELECT ACCOUNT">
                     Select Account
-                  </MDTypography>
+                  </MDBox>
                   {accounts.map((data) => {
                     return (
-                      <MDTypography component="option" variant="caption" value={data.accountName}>
+                      <MDBox component="option" color="text" value={data.accountName}>
                         {data.accountName}
-                      </MDTypography>
+                      </MDBox>
                     );
                   })}
                 </MDBox>
@@ -165,6 +166,7 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                   MODULE
                 </MDTypography>
                 <MDBox
+                  color="text"
                   component="select"
                   value={type}
                   onChange={(e) => setType(e.target.value)}
@@ -175,22 +177,22 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                     borderRadius: "5px",
                     minHeight: "35px",
                     paddingLeft: "6px",
-                    fontSize: "12px",
+                    fontSize: "13px",
                   }}
                 >
-                  <MDTypography component="option" value="Select Type" variant="caption">
+                  <MDBox color="text" component="option" value="Select Type">
                     Select Type
-                  </MDTypography>
-                  <MDTypography component="option" value="GL" variant="caption">
+                  </MDBox>
+                  <MDBox color="text" component="option" value="Select Type">
                     GL
-                  </MDTypography>
-                  <MDTypography component="option" value="AR" variant="caption">
+                  </MDBox>
+                  <MDBox color="text" component="option" value="Select Type">
                     AR
-                  </MDTypography>
+                  </MDBox>
 
-                  <MDTypography component="option" value="AP" variant="caption">
+                  <MDBox color="text" component="option" value="Select Type">
                     AP
-                  </MDTypography>
+                  </MDBox>
                 </MDBox>
               </MDBox>
               <MDBox>
@@ -212,9 +214,9 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                       cursor: "pointer",
                     }}
                   >
-                    <MDTypography variant="caption">
+                    <MDBox color="text" fontSize="13px">
                       {categoryValue !== "" ? categoryValue : "Select"}
-                    </MDTypography>
+                    </MDBox>
                     <MDTypography>
                       <ArrowDropDown />
                     </MDTypography>
@@ -324,10 +326,11 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                         )}
                         {data.type === "select" && (
                           <MDBox width="110px">
-                            <MDTypography variant="caption" fontWeight="medium">
+                            <MDBox color="text" fontSize="13px">
                               {data.label}
-                            </MDTypography>
+                            </MDBox>
                             <MDBox
+                              color="text"
                               component="select"
                               value={data.value}
                               onChange={(e) => updateOpeningBalanceForm(data.label, e.target.value)}
@@ -341,31 +344,33 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                                 paddingLeft: "6px",
                               }}
                             >
-                              <MDTypography component="option" value="SELECT" variant="caption">
+                              <MDBox component="option" value="Select" color="text" fontSize="13px">
                                 Select
-                              </MDTypography>
+                              </MDBox>
                               {data.label === "Account" &&
                                 accounts.map((data) => {
                                   return (
-                                    <MDTypography
+                                    <MDBox
+                                      color="text"
+                                      fontSize="13px"
                                       component="option"
                                       value={data.accountName}
-                                      variant="caption"
                                     >
                                       {data.accountName}
-                                    </MDTypography>
+                                    </MDBox>
                                   );
                                 })}
                               {data.label === "Ledger" &&
                                 ledgers.map((data) => {
                                   return (
-                                    <MDTypography
+                                    <MDBox
                                       component="option"
                                       value={data.ledgerName}
-                                      variant="caption"
+                                      color="text"
+                                      fontSize="13px"
                                     >
                                       {data.ledgerName}
-                                    </MDTypography>
+                                    </MDBox>
                                   );
                                 })}
                             </MDBox>
@@ -373,9 +378,9 @@ export default function CreateLedger({ submitted, cancel, category, accounts }) 
                         )}
                         {data.type === "date" && (
                           <MDBox width="110px">
-                            <MDTypography variant="caption" fontWeight="medium">
+                            <MDBox color="text" fontSize="13px">
                               {data.label}
-                            </MDTypography>
+                            </MDBox>
                             <MDInput
                               type={data.type}
                               value={data.value}

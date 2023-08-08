@@ -128,9 +128,9 @@ export default function Transactions() {
                         <>
                           {data.type !== "date" && data.type !== "select" && (
                             <MDBox width="100px">
-                              <MDTypography variant="caption" fontWeight="medium">
+                              <MDBox color="text" fontSize="13px">
                                 {data.label}
-                              </MDTypography>
+                              </MDBox>
                               <MDInput
                                 type={data.type}
                                 label={data.label}
@@ -145,10 +145,11 @@ export default function Transactions() {
                           )}
                           {data.type === "select" && (
                             <MDBox width="100px">
-                              <MDTypography variant="caption" fontWeight="medium">
+                              <MDBox color="text" fontSize="13px">
                                 {data.label}
-                              </MDTypography>
+                              </MDBox>
                               <MDBox
+                                color="text"
                                 component="select"
                                 value={data.value}
                                 onChange={(e) =>
@@ -164,31 +165,40 @@ export default function Transactions() {
                                   paddingLeft: "6px",
                                 }}
                               >
-                                <MDTypography component="option" value="SELECT" variant="caption">
+                                <MDBox
+                                  color="text"
+                                  component="option"
+                                  value="SELECT"
+                                  fontSize="13px"
+                                >
                                   Select
-                                </MDTypography>
+                                </MDBox>
                                 {(data.label === "Account" || data.label === "Contra Account") &&
                                   accounts.map((data) => {
                                     return (
-                                      <MDTypography
-                                        component="option"
+                                      <MDBox
+                                        color="text"
+                                        fontSize="13px"
                                         value={data.accountName}
                                         variant="caption"
+                                        component="option"
                                       >
                                         {data.accountName}
-                                      </MDTypography>
+                                      </MDBox>
                                     );
                                   })}
                                 {(data.label === "Ledger" || data.label === "Contra Ledger") &&
                                   ledgers.map((data) => {
                                     return (
-                                      <MDTypography
-                                        component="option"
+                                      <MDBox
+                                        color="text"
+                                        fontSize="13px"
                                         value={data.ledgerName}
                                         variant="caption"
+                                        component="option"
                                       >
                                         {data.ledgerName}
-                                      </MDTypography>
+                                      </MDBox>
                                     );
                                   })}
                               </MDBox>
@@ -196,9 +206,9 @@ export default function Transactions() {
                           )}
                           {data.type === "date" && (
                             <MDBox width="100px">
-                              <MDTypography variant="caption" fontWeight="medium">
+                              <MDBox color="text" fontSize="13px">
                                 {data.label}
-                              </MDTypography>
+                              </MDBox>
                               <MDInput
                                 type={data.type}
                                 value={data.value}

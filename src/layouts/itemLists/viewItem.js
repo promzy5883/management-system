@@ -18,7 +18,7 @@ export default function ItemDetails({ no, cancel, data }) {
           maxWidth: "450px",
           width: "90%",
           p: 2,
-          height: "390px",
+          height: "370px",
           overflowY: "scroll",
           transition: "0.4s",
           transform: `translateY(${position}px)`,
@@ -26,6 +26,7 @@ export default function ItemDetails({ no, cancel, data }) {
         }}
       >
         <MDTypography
+          color="text"
           variant="caption"
           fontWeight="bold"
           width="100%"
@@ -39,7 +40,7 @@ export default function ItemDetails({ no, cancel, data }) {
             onClick={() => cancel()}
             style={{ border: "none", backgroundColor: "transparent", cursor: "pointer" }}
           >
-            <MDTypography>
+            <MDTypography color="text">
               <Close fontSize="small" color="inherit" />
             </MDTypography>
           </button>
@@ -54,10 +55,12 @@ export default function ItemDetails({ no, cancel, data }) {
             alignItems: "center",
           }}
         >
-          <MDTypography variant="button" fontWeight="medium">
+          <MDTypography color="text" variant="button" fontWeight="medium">
             Name
           </MDTypography>
-          <MDTypography variant="caption">{mainData.plainName.toUpperCase()}</MDTypography>
+          <MDTypography color="text" variant="caption">
+            {mainData.plainName.toUpperCase()}
+          </MDTypography>
         </div>
         <div
           style={{
@@ -69,10 +72,12 @@ export default function ItemDetails({ no, cancel, data }) {
             alignItems: "center",
           }}
         >
-          <MDTypography variant="button" fontWeight="medium">
+          <MDTypography color="text" variant="button" fontWeight="medium">
             Brand Name
           </MDTypography>
-          <MDTypography variant="caption">{mainData.brandName.toUpperCase()}</MDTypography>
+          <MDTypography color="text" variant="caption">
+            {mainData.brandName.toUpperCase()}
+          </MDTypography>
         </div>
         <div
           style={{
@@ -84,18 +89,22 @@ export default function ItemDetails({ no, cancel, data }) {
             alignItems: "center",
           }}
         >
-          <MDTypography variant="button" fontWeight="medium">
+          <MDTypography color="text" variant="button" fontWeight="medium">
             Category
           </MDTypography>
-          <MDTypography variant="caption">{mainData.category.toUpperCase()}</MDTypography>
+          <MDTypography color="text" variant="caption">
+            {mainData.category.toUpperCase()}
+          </MDTypography>
         </div>
 
         <MDTypography
-          variant="body2"
-          fontWeight="medium"
+          variant="caption"
+          fontWeight="bold"
+          fontSize="14px"
           width="100%"
           marginTop="16px"
           marginBottom="10px"
+          color="text"
         >
           ITEM UNITS
         </MDTypography>
@@ -111,10 +120,10 @@ export default function ItemDetails({ no, cancel, data }) {
                 flexWrap: "wrap",
               }}
             >
-              <MDTypography variant="caption">
+              <MDTypography color="text" variant="caption">
                 UNIT NAME:&nbsp;<b>{unit.unit}</b>
               </MDTypography>
-              <MDTypography variant="caption">
+              <MDTypography color="text" variant="caption">
                 UNIT SELLING PRICE:&nbsp;<b>{unit.unitPrice}</b>
               </MDTypography>
 
@@ -126,10 +135,10 @@ export default function ItemDetails({ no, cancel, data }) {
                   flexWrap: "wrap",
                 }}
               >
-                <MDTypography variant="caption">
+                <MDTypography color="text" variant="caption">
                   SKU CODE:&nbsp;<b>{unit.unitBarCode}</b>
                 </MDTypography>
-                <MDTypography variant="caption">
+                <MDTypography color="text" variant="caption">
                   MINIMUM STOCK QTY:&nbsp;<b>{unit.minimumStock}</b>
                 </MDTypography>
               </div>
