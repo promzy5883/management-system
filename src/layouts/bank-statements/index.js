@@ -9,8 +9,7 @@ import MDTypography from "components/MDTypography";
 import MDInput from "components/MDInput";
 
 import backgroundImage from "assets/images/bg-sign-in-basic.jpeg";
-import MDButton from "components/MDButton";
-import { Download } from "@mui/icons-material";
+import { PictureAsPdf, PictureAsPdfRounded } from "@mui/icons-material";
 
 export default function BankStatements() {
   const [from, setFrom] = useState("");
@@ -165,16 +164,58 @@ export default function BankStatements() {
               style={{
                 width: "100%",
                 display: "flex",
-                gap: "10px",
                 justifyContent: "center",
               }}
             >
-              <MDButton display="flex" alignItems="center" size="small" color="dark">
-                <Download /> Dowload PDF
-              </MDButton>
-              <MDButton display="flex" alignItems="center" size="small" color="dark">
-                <Download /> Dowload Excel
-              </MDButton>
+              <MDBox display="flex" border="1px solid rgb(230, 226, 226)" borderRadius="5px">
+                <button
+                  style={{
+                    border: "none",
+                    display: "flex",
+                    width: "auto",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "36px",
+                    background: "transparent",
+                    cursor: "pointer",
+                    padding: "0px 10px",
+                    borderRight: "1px solid rgb(230,226,226)",
+                  }}
+                >
+                  <MDTypography
+                    color="text"
+                    variant="caption"
+                    fontWeight="medium"
+                    display="flex"
+                    alignItems="center"
+                  >
+                    Download PDF&nbsp; <PictureAsPdf />
+                  </MDTypography>
+                </button>
+                <button
+                  style={{
+                    padding: "0px 10px",
+                    border: "none",
+                    display: "flex",
+                    width: "auto",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "36px",
+                    background: "transparent",
+                    cursor: "pointer",
+                  }}
+                >
+                  <MDTypography
+                    color="text"
+                    variant="caption"
+                    fontWeight="medium"
+                    display="flex"
+                    alignItems="center"
+                  >
+                    Download Excel&nbsp; <PictureAsPdfRounded />
+                  </MDTypography>
+                </button>
+              </MDBox>
             </div>
             <div
               style={{

@@ -32,6 +32,7 @@ import CashFlow from "layouts/cash-flow";
 import Transactions from "layouts/transactions";
 import BankStatements from "layouts/bank-statements";
 import Enquiries from "layouts/enquiries";
+import Reports from "layouts/reports";
 
 const routes = [
   {
@@ -298,7 +299,7 @@ export const childrenRoutes = [
     name: "Reports",
     key: "reports",
     route: "/accounts-reports",
-    component: <Dashboard />,
+    component: <Reports />,
   },
   {
     isLink: true,
