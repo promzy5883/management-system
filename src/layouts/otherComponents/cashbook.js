@@ -1,8 +1,5 @@
 import MDBox from "components/MDBox";
-import MDButton from "components/MDButton";
 import MDTypography from "components/MDTypography";
-import DataTable from "examples/Tables/DataTable";
-import { useEffect, useState } from "react";
 
 export default function Cashbook() {
   return (
@@ -17,6 +14,7 @@ export default function Cashbook() {
         Cash Book
       </MDTypography>
       <MDBox
+        border="1px solid red"
         width="100%"
         display="flex"
         flexWrap="wrap"
