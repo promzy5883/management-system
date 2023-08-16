@@ -14,7 +14,6 @@ export default function Cashbook() {
         Cash Book
       </MDTypography>
       <MDBox
-        border="1px solid red"
         width="100%"
         display="flex"
         flexWrap="wrap"
