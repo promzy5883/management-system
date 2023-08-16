@@ -79,15 +79,7 @@ export default function ConsolidatedIncomeStatement() {
         alignItems="flex-end"
         padding="0px 20px"
       >
-        <div
-          style={{
-            display: "flex",
-            gap: "15px",
-            flexWrap: "wrap",
-            columnGap: "15px",
-            alignItems: "flex-end",
-          }}
-        >
+        <div className="consolidatedIncomeStatementBox">
           <MDBox>
             <MDTypography
               variant="caption"

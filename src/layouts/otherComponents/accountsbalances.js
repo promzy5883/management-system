@@ -51,6 +51,8 @@ export default function AccountsBalances() {
         width="100%"
         display="flex"
         justifyContent="space-between"
+        columnGap="12px"
+        rowGap="12px"
         flexWrap="wrap"
         alignItems="flex-end"
         padding="0px 20px"

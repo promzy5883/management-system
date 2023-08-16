@@ -37,6 +37,7 @@ export default function Reports() {
           <MDBox
             display="flex"
             alignItems="center"
+            justifyContent="center"
             position="relative"
             minHeight="18.75rem"
             padding="10px 0px 80px 0px"
@@ -52,17 +53,7 @@ export default function Reports() {
               overflow: "hidden",
             }}
           >
-            <MDBox
-              height="auto"
-              width="90%"
-              display="flex"
-              flexDirection="row"
-              left="20px"
-              flexWrap="wrap"
-              rowGap="10px"
-              columnGap="10px"
-              justifyContent="center"
-            >
+            <div className="buttonsBox">
               {buttons.map((button) => {
                 return (
                   <MDButton
@@ -75,7 +66,7 @@ export default function Reports() {
                   </MDButton>
                 );
               })}
-            </MDBox>
+            </div>
           </MDBox>
 
           <MDBox width="100%" display="flex" justifyContent="center" marginTop="-10px">

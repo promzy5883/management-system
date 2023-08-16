@@ -55,6 +55,8 @@ export default function ChartsOfAccounts() {
         justifyContent="space-between"
         flexWrap="wrap"
         alignItems="flex-end"
+        columnGap="12px"
+        rowGap="12px"
         padding="0px 20px"
       >
         <MDBox>

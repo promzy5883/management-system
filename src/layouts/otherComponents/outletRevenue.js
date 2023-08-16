@@ -183,17 +183,7 @@ export default function OutletRevenue({ active, nonActive }) {
           Outlet Revenue
         </MDTypography>
 
-        <div
-          style={{
-            padding: "10px",
-            display: "flex",
-            flexWrap: "wrap",
-            rowGap: "8px",
-            columnGap: "20px",
-            justifyContent: "center",
-            alignItems: "flex-end",
-          }}
-        >
+        <div className="outletRevenueFilterBox">
           <div style={{ display: "flex", flexDirection: "column", width: "auto", gap: "10px" }}>
             <MDTypography variant="caption" color="text" fontWeight="bold">
               Outlets:

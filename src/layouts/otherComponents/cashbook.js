@@ -24,7 +24,7 @@ export default function Cashbook() {
         columnGap="15px"
         justifyContent="center"
       >
-        <MDBox width="600px" minWidth="340px" maxWidth="49%" overflowX="scroll">
+        <div className="cashbookhalf">
           <div style={{ width: "100%", minWidth: "100%" }}>
             <MDTypography
               width="100%"
@@ -106,8 +106,8 @@ export default function Cashbook() {
               </MDTypography>
             </MDBox>
           </div>
-        </MDBox>
-        <MDBox width="600px" minWidth="340px" maxWidth="49%" overflowX="scroll">
+        </div>
+        <div className="cashbookhalf">
           <div style={{ minWidth: "100%" }}>
             <MDTypography
               width="100%"
@@ -189,7 +189,7 @@ export default function Cashbook() {
               </MDTypography>
             </MDBox>
           </div>
-        </MDBox>
+        </div>
       </MDBox>
     </MDBox>
   );
